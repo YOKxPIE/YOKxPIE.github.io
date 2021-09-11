@@ -18,6 +18,5 @@ class Course(models.Model):
     
     def __str__(self):
         return f"This course is {self.c_code}"
-    
-    
+
     
