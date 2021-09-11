@@ -1,0 +1,13 @@
+{% extends "courses/layout.html" %}
+
+{% block body %}
+
+    <h1>Course: {{ c_code }}</h1>
+    <ul>
+        <li>{{c_name}}</li>
+        <li>{{semester}}/{{a_year}}</li>
+        <li>Number of students enrolled: {{count_stu}}</li>
+        <li>Limits: {{max_stu}}</li>
+    </ul>
+
+{% endblock %}

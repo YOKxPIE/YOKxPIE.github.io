@@ -15,9 +15,8 @@ class Course(models.Model):
     max_stu = models.IntegerField()
     # Is this course open?  default = yes
     status = models.BooleanField(default=True)
-    
+
     def __str__(self):
-        return f"This course is {self.c_code}"
-    
-    
-    
+        return f"{self.c_code} {self.semester}/{self.a_year}"
+
+
