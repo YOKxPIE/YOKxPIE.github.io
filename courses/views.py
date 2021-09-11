@@ -6,7 +6,7 @@ from .models import Course
 
 def index(request):
     return render(request, "courses/index.html", {
-        "courses": Course.objects.all()
+        "courses": Course. objects.all()
     })
 
 
@@ -15,3 +15,4 @@ def course(request, c_code):
     return render(request, "courses/course.html", {
         "course": course
     })
+
