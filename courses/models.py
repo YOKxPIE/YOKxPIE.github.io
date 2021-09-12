@@ -16,8 +16,9 @@ class Course(models.Model):
     max_stu = models.IntegerField()
     # Is this course open?  default = yes
     status = models.BooleanField(default=True)
-    
+
     def __str__(self):
+<<<<<<< HEAD
         return f"This course is {self.c_code}"
 
 #class Take(models.Model):
@@ -28,3 +29,8 @@ class Course(models.Model):
     
     #def __str__(self):
         #return f"{self.id} {self.students}: {self.t_code} {self.t_semester} {self.t_year}"
+=======
+        return f"{self.c_code} {self.semester}/{self.a_year}"
+
+
+>>>>>>> 4b112a4187b032ba2a9f9b027915ce2aeb8d7b15

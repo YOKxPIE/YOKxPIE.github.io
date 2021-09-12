@@ -1,0 +1,14 @@
+{% extends "courses/layout.html" %}
+
+{% block body %}
+
+    <h1>Courses</h1>
+    <ul>
+        {% for course in courses %}
+            {% if course.status %}
+                <li>{{course}}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+{% endblock %}
