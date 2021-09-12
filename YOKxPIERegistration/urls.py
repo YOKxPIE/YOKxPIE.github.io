@@ -24,7 +24,7 @@ urlpatterns = [
     # path('course/', include('courses.urls')),
 
     # ทดลอง
-    path('', include('courses.urls')),
+    path('', include('courses.urls')), #อาจจะเป็นcoursesแทน
 
     # ที่คิดในหัวว่าอยากมี
     # path('login/', ),

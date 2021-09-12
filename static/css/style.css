@@ -1,4 +1,4 @@
-* {
+/** {
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -13,4 +13,185 @@ h3 {
 
 p {
     color: gray;
+}
+
+อันเก่า
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    display: flex;
+    /*justify-content: center;
+    align-items: center;*/
+    min-height: 100vh;
+    background-color: brown;
+    background-attachment: fixed;
+}
+
+
+/* ============temporary============ */
+h1 {
+    color: white;
+}
+/* ============temporary============ */
+
+.container {
+    position: relative;
+    width: 2000px;
+    padding: 20px;
+    /*display: flex;*/
+    justify-content: center;
+    align-items: center;
+    /*flex-wrap: wrap;*/
+}
+
+.container .ticket {
+    position: relative;
+    width: 480px;
+    height: 135px;
+    /*background: white;*/
+    margin: 20px auto;
+    border-radius: 30px;
+    overflow: hidden;
+    /*box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);*/
+    text-align: center;
+    display: flex;
+}
+
+.container .ticket .left {
+    /*background: gray;*/
+    width: 355px;
+
+    /*border-right: 2px dashed #e5e5e5;*/
+    /* use color looklike background */
+    border-right: 2px dashed brown;
+    background: white;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);
+}
+
+.container .ticket .left .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    /*background: darkgreen;*/
+}
+
+.container .ticket .left .head .h-l {
+    padding-left: 1rem;
+    color: firebrick;
+}
+
+.container .ticket .left .head .h-r {
+    padding-right: 1rem;
+    color: #666666;
+}
+
+.container .ticket .left .cname {
+    height: 55px;
+    /*background: darkslateblue;*/
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    padding: 1rem;
+    color: rgb(51, 51, 51);
+}
+
+.container .ticket .left .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    /*background: darkgreen;*/
+}
+
+.container .ticket .left .footer .ft-l {
+    display: flex;
+    padding-left: .7rem;
+}
+
+.container .ticket .left .footer .ft-l img {
+    height: 25px;
+}
+
+.container .ticket .left .footer .ft-r {
+    display: flex;
+    padding-right: .7rem;
+}
+
+.container .ticket .left .footer .ft-r p{
+    font-size: 14px;
+    color: #929292;
+}
+
+.container .ticket .right {
+    width: 125px;
+    background: white;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);
+}
+
+.container .ticket .right .head {
+    align-items: center;
+    display: flex;
+    height: 40px;
+    /*background: darkgreen;*/
+    justify-content: space-between;
+}
+
+.container .ticket .right .head .h-l {
+    display: flex;
+    padding-left: .5rem;
+}
+
+.container .ticket .right .head .h-r {
+    color: firebrick;
+    padding-right: 1rem;
+}
+
+.container .ticket .right .head .h-l img {
+    height: 20px;
+}
+
+.container .ticket .right .content {
+    height: 55px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    /*background: gray;*/
+}
+
+.container .ticket .right .footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    /*color: #666666;*/
+    color: #929292;
+}
+
+.container .ticket .right .content a {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    background: rgb(5, 179, 5);
+    color: white;
+    border-radius: 15px;
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+.container .ticket .right .content a:hover {
+    background: rgb(28, 134, 28);
 }

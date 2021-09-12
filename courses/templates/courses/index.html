@@ -3,12 +3,55 @@
 {% block body %}
 
     <h1>Courses</h1>
-    <ul>
+    <!-- อันเก่า
+    <ul> -->
+    <div class="container">
         {% for course in courses %}
             {% if course.status %}
-                <li><h3>{{course.c_code}}</h3> <p>{{course.c_name}}</p></li>
+                <!-- อันเก่า
+                <li><h3>{{course.c_code}}</h3> <p>{{course.c_name}}</p></li> -->
+                <div class="ticket">
+                    <div class="left">
+                        <div class="head">
+                            <div class="h-l">
+                                <h3>{{course.c_code}}</h3>
+                            </div>
+                            <div class="h-r">
+                                <h5>{{course.semester}}/{{course.a_year}}</h5>
+                            </div>
+                        </div>
+                        <div class="cname">
+                            <h3>{{course.c_name}}</h3>
+                        </div>
+                        <div class="footer">
+                            <div class="ft-l">
+                                <img src="TUlogoHor.png" alt="">
+                            </div>
+                            <div class="ft-r">
+                                <p>No. {{course.count_stu}}/{{course.max_stu}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="head">
+                            <div class="h-l">
+                                <img src="Thammasat_main_logo.png" alt="">
+                            </div>
+                            <div class="h-r">
+                                <h3>{{course.c_code}}</h3>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <a href="#">Enroll</a>  <!-- don't forget to link -->
+                        </div>
+                        <div class="footer">
+                            <p>{{course.semester}}/{{course.a_year}}</p>
+                        </div>
+                    </div>
+                </div>
             {% endif %}
         {% endfor %}
-    </ul>
+    </div>
+    <!-- </ul> -->
 
 {% endblock %}
