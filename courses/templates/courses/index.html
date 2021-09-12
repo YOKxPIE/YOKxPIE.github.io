@@ -1,5 +1,7 @@
 {% extends "courses/layout.html" %}
 
+{% load static %}
+
 {% block body %}
 
     <h1>Courses</h1>
@@ -25,7 +27,7 @@
                         </div>
                         <div class="footer">
                             <div class="ft-l">
-                                <img src="TUlogoHor.png" alt="">
+                                <img src="{% static 'images/TUlogoHor.png' %}" alt="">
                             </div>
                             <div class="ft-r">
                                 <p>No. {{course.count_stu}}/{{course.max_stu}}</p>
@@ -35,7 +37,7 @@
                     <div class="right">
                         <div class="head">
                             <div class="h-l">
-                                <img src="Thammasat_main_logo.png" alt="">
+                                <img src="{% static 'images/Thammasat_main_logo.png' %}" alt="">
                             </div>
                             <div class="h-r">
                                 <h3>{{course.c_code}}</h3>
