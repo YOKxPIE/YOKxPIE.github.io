@@ -28,6 +28,4 @@ urlpatterns = [
 
     # ที่คิดในหัวว่าอยากมี
     # path('login/', ),
-    # path('register/', ),
-    # path('', ),
 ]
