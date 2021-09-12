@@ -1,4 +1,5 @@
 from django.db import models
+#from django.contrib.auth.models import User
 
 # Create your models here.
 class Course(models.Model):
@@ -19,4 +20,11 @@ class Course(models.Model):
     def __str__(self):
         return f"This course is {self.c_code}"
 
+#class Take(models.Model):
+    #t_code = models.ForeignKey(Course, on_delete=models.CASCADE)
+    #t_semester = models.ForeignKey(Course, on_delete=models.CASCADE)
+    #t_year = models.ForeignKey(Course, on_delete=models.CASCADE)
+    #students = models.ManyToManyField(User, blank=True)
     
+    #def __str__(self):
+        #return f"{self.id} {self.students}: {self.t_code} {self.t_semester} {self.t_year}"
