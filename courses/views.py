@@ -16,3 +16,9 @@ def course(request, c_code):
         "course": course
     })
 
+# ทดลอง
+# def registration():
+
+# ทดลอง
+# def courses():
+

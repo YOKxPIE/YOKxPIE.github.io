@@ -19,6 +19,15 @@ from courses import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('course/', include('courses.urls')),
 
+    # ทำตามอาจารย์
+    # path('course/', include('courses.urls')),
+
+    # ทดลอง
+    path('', include('courses.urls')),
+
+    # ที่คิดในหัวว่าอยากมี
+    # path('login/', ),
+    # path('register/', ),
+    # path('', ),
 ]
