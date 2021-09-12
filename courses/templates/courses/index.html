@@ -6,7 +6,7 @@
     <ul>
         {% for course in courses %}
             {% if course.status %}
-                <li>{{course}}</li>
+                <li><h3>{{course.c_code}}</h3> <p>{{course.c_name}}</p></li>
             {% endif %}
         {% endfor %}
     </ul>
