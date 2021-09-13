@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 
-from .models import Course
+from .models import *
 
 def index(request): #เดี๋ยวเปลี่ยน
     context = {"courses": Course.objects.all()}
@@ -11,14 +11,13 @@ def index(request): #เดี๋ยวเปลี่ยน
 
 def course(request, pk_test):
     course = Course.objects.get(id=pk_test)
-    return render(request, "courses/course.html", {
-        "course": course})
+    return render(request, "courses/course.html", {"course": course})
 
 
 def registration(request, student_id):
-    my_course = Course.objects.get(pk=student_id)
-    total_mycourse = my_course.count() # เด็กลงไปกี่วิชา
-    context = {"course": my_course, "total_mycourse": total_mycourse}
+    my_course = Course.objects.get(id=student_id)
+    mycourse_count = my_course.count() # เด็กลงไปกี่วิชา
+    context = {"course": my_course, "mycourse_count": mycourse_count}
     return render(request, "courses/registration.html", context)
 
 

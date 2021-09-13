@@ -47,7 +47,7 @@
                         <!-- Full แบบเก่า -->
                         <!-- {% if course.count_stu != course.max_stu %}-->
                         <div class="content">
-                            <a href="#">Enroll</a>  <!-- don't forget to link -->
+                            <a href="{% url 'courses:acourse' course.id %}">Enroll</a>  <!-- don't forget to link -->  <!-- ลองโยงปุ่มไปหน้าย่อย -->
                         </div>
                         <!-- {% else %}
                         <div class="content">
