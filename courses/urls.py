@@ -7,8 +7,9 @@ urlpatterns = [
     # ทำตามอาจารย์
     path('', views.index, name="index"),
 
-    # ทดลอง
+
     path('registration/', views.registration, name="registration"),
     path('courses/', views.courses, name="courses"),
+    path('course/<str:pk_test>/', views.course, name="course")
 
 ]

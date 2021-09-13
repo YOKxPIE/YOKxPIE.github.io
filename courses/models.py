@@ -19,16 +19,17 @@ class Course(models.Model):
     def __str__(self):
         return f"{self.c_code} {self.semester}/{self.a_year}"
 
+
 class Student(models.Model):
     First_name = models.CharField(max_length=100, null = True)
     Last_name = models.CharField(max_length=100, null = True)
     email = models.CharField(max_length=200, null = True)
     student_id = models.CharField(max_length=10, null = True)
 
-    
     def __str__(self):
         return f"{self.student_id}: {self.First_name} {self.Last_name}"
         
+
 class Enroll(models.Model):
     student = models.ForeignKey(Student, null=True, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, null=True, on_delete=models.CASCADE)
