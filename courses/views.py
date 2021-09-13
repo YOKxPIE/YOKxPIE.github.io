@@ -26,3 +26,7 @@ def courses(request):
     return render(request, "courses/courses.html", context)
 
 
+def admincourses(request):
+    context = {"courses": Course.objects.all()}
+    return render(request, "courses/admincourses.html", context)
+

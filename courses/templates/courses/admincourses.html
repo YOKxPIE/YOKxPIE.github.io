@@ -3,8 +3,8 @@
 {% load static %}
 
 {% block body %}
-
-    <h1>Courses</h1>
+<!-- ทดลองปุ่มดูรายละเอียดเฉยๆ เดี๋ยวออกแบบใหม่ -->
+    <h1>AdminCourses</h1>
     <!-- อันเก่า
     <ul> -->
     <div class="container">
@@ -47,7 +47,7 @@
                         <!-- Full แบบเก่า -->
                         <!-- {% if course.count_stu != course.max_stu %}-->
                         <div class="content">
-                            <a href="#">Enroll</a>              <!-- don't forget to link -->
+                            <a href="{% url 'courses:acourse' course.id %}">Detail</a>  <!-- don't forget to link -->  <!-- ลองโยงปุ่มไปหน้าย่อย -->
                         </div>
                         <!-- {% else %}
                         <div class="content">

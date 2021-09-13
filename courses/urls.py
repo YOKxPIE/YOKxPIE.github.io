@@ -10,6 +10,7 @@ urlpatterns = [
 
     path('registration/', views.registration, name="registration"),
     path('courses/', views.courses, name="courses"),
-    path('course/<str:pk_test>/', views.course, name="acourse")
+    path('admincourses/', views.admincourses, name="admincourses"),
+    path('course/<str:pk_test>/', views.course, name="acourse"),
 
 ]
