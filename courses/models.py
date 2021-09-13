@@ -16,7 +16,5 @@ class Course(models.Model):
     # Is this course open?  default = yes
     status = models.BooleanField(default=True)
 
-    def __str__(self):
-        return f"{self.c_code} {self.semester}/{self.a_year}"
-
-
+def __str__(self):
+    return f"{self.c_code} {self.semester}/{self.a_year}"
