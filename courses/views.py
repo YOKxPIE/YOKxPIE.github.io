@@ -4,10 +4,9 @@ from django.shortcuts import render
 
 from .models import Course
 
-def index(request):
-    return render(request, "courses/index.html", {
-        "courses": Course.objects.all()
-    })
+def index(request): #เดี๋ยวเปลี่ยน
+    context = {"courses": Course.objects.all()}
+    return render(request, "courses/index.html", context)
 
 
 def course(request, c_code):
@@ -17,8 +16,11 @@ def course(request, c_code):
     })
 
 # ทดลอง
-# def registration():
+def registration(request):
+    # context = {}
+    return render(request, "courses/registration.html")#, context)
 
-# ทดลอง
-# def courses():
 
+def courses(request):
+    context = {"courses": Course.objects.all()}
+    return render(request, "courses/courses.html", context)

@@ -8,7 +8,7 @@ urlpatterns = [
     path('', views.index, name="index"),
 
     # ทดลอง
-    # path('registration/', views.registration, name="registration"), # ถ้ารันน่าจะerrorเพราะยังไม่defในviews.py
-    # path('courses/', views.courses, name="courses"), # ถ้ารันน่าจะerrorเพราะยังไม่defในviews.py
+    path('registration/', views.registration, name="registration"),
+    path('courses/', views.courses, name="courses"),
 
 ]

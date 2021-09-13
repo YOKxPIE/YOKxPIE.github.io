@@ -1,0 +1,75 @@
+{% extends "courses/layout.html" %}
+
+{% load static %}
+
+{% block body %}
+
+    <h1>Courses</h1>
+    <!-- อันเก่า
+    <ul> -->
+    <div class="container">
+        {% for course in courses %}
+            {% if course.status %}
+                <!-- อันเก่า
+                <li><h3>{{course.c_code}}</h3> <p>{{course.c_name}}</p></li> -->
+                <div class="ticket">
+                    <div class="left">
+                        <div class="head">
+                            <div class="h-l">
+                                <h3>{{course.c_code}}</h3>
+                            </div>
+                            <div class="h-r">
+                                <h5>{{course.semester}}/{{course.a_year}}</h5>
+                            </div>
+                        </div>
+                        <div class="cname">
+                            <h3>{{course.c_name}}</h3>
+                        </div>
+                        <div class="footer">
+                            <div class="ft-l">
+                                <img src="{% static 'images/TUlogoHor.png' %}" alt="">
+                            </div>
+                            <div class="ft-r">
+                                <p>Seat No. {{course.count_stu}}/{{course.max_stu}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% if course.count_stu != course.max_stu %}
+                    <div class="right">
+                        <div class="head">
+                            <div class="h-l">
+                                <img src="{% static 'images/Thammasat_main_logo.png' %}" alt="">
+                            </div>
+                            <div class="h-r">
+                                <h3>{{course.c_code}}</h3>
+                            </div>
+                        </div>
+                        <!-- Full แบบเก่า -->
+                        <!-- {% if course.count_stu != course.max_stu %}-->
+                        <div class="content">
+                            <a href="#">Enroll</a>  <!-- don't forget to link -->
+                        </div>
+                        <!-- {% else %}
+                        <div class="content">
+                            <p>FULL</p>
+                        </div>
+                        {% endif %} -->
+
+                        <div class="footer">
+                            <p>{{course.semester}}/{{course.a_year}}</p>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="rightfull">
+                        <div class="content">
+                            <h3>FULL</h3>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <!-- </ul> -->
+
+{% endblock %}
