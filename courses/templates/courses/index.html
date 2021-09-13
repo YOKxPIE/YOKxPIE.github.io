@@ -34,6 +34,7 @@
                             </div>
                         </div>
                     </div>
+                    {% if course.count_stu != course.max_stu %}
                     <div class="right">
                         <div class="head">
                             <div class="h-l">
@@ -43,21 +44,28 @@
                                 <h3>{{course.c_code}}</h3>
                             </div>
                         </div>
-
-                        {% if course.count_stu != course.max_stu %}
+                        <!-- Full แบบเก่า
+                        <!-- {% if course.count_stu != course.max_stu %}-->
                         <div class="content">
                             <a href="#">Enroll</a>  <!-- don't forget to link -->
                         </div>
-                        {% else %}
+                        <!-- {% else %}
                         <div class="content">
                             <p>FULL</p>
                         </div>
-                        {% endif %}
+                        {% endif %} -->
 
                         <div class="footer">
                             <p>{{course.semester}}/{{course.a_year}}</p>
                         </div>
                     </div>
+                    {% else %}
+                    <div class="rightfull">
+                        <div class="content">
+                            <h3>FULL</h3>
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
             {% endif %}
         {% endfor %}
