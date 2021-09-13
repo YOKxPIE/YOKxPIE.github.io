@@ -1,5 +1,5 @@
 from django.db import models
-#from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 #from django.contrib.auth.models import User
 
 # Create your models here.
@@ -20,22 +20,22 @@ class Course(models.Model):
 
     def __str__(self):
         return f"{self.c_code} {self.semester}/{self.a_year}"
-        
-        
+
+
 class Student(models.Model):
     name = models.CharField(max_length=200)
     course = models.ManyToManyField(Course ,blank=True ,related_name="students")
 
     def __str__(self):
         return f"{self.id} : {self.name}"
-        
-        
-#class Take(models.Model):
+
+
+class enroll(models.Model):
     #t_code = models.ForeignKey(Course, on_delete=models.CASCADE)
-    #course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     #t_semester = models.ForeignKey(Course, on_delete=models.CASCADE)
     #t_year = models.ForeignKey(Course, on_delete=models.CASCADE)
-    #student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    
-    #def __str__(self):
-        #return f"{self.id} {self.students}: {self.course}"
+    students = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.id} {self.students}: {self.course}"

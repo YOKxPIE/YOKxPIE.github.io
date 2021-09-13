@@ -9,4 +9,4 @@ class StudentAdmin(admin.ModelAdmin):
     
 admin.site.register(Course)
 admin.site.register(Student ,StudentAdmin)
-#admin.site.register(Take)
+admin.site.register(enroll)
