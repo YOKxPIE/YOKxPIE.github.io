@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required 
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -14,11 +14,12 @@ def index(request):
     if not request.user.is_authenticated:
         return render(request, 'users/login.html')
     else:
-        return render(request, "courses/index.html", {
+        return render(request, "index.html", {
             "courses": Course.objects.all()
         })
-    
 
+def course(request):
+    return render(re)
 
 
 

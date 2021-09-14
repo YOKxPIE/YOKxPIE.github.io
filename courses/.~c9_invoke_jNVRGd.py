@@ -8,3 +8,13 @@ urlpatterns = [
     path('courses/', views.course, name="courses"),
     path('', views.index, name="index")
 ]
+
+
+
+
+
+
+
+
+
+

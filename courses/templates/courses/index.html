@@ -4,11 +4,7 @@
 
     <h1>Courses</h1>
     <ul>
-        {% for course in courses %}
-            {% if course.status %}
-                <li>{{course}}</li>
-            {% endif %}
-        {% endfor %}
+        
     </ul>
     <p><a href="{% url 'users:logout' %}">Log out</a></p>
 {% endblock %}
