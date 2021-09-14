@@ -141,8 +141,11 @@ h1{ /* temporary */
     width: 355px;
 
     /*border-right: 2px dashed #e5e5e5;*/
+
     /* use color looklike background */
+
     border-right: 2px dashed brown;
+
     background: white;
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
