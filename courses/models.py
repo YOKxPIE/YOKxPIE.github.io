@@ -1,13 +1,11 @@
 from django.db import models
-from django.contrib.auth.models import User
-#from django.contrib.auth.models import User
 
 # Create your models here.
 class Course(models.Model):
     # course code ex.CN331
     c_code = models.CharField(max_length=5)
     # course name
-    c_name = models.CharField(max_length=150)
+    c_name = models.CharField(max_length=150, null = True)
     semester = models.IntegerField()
     # academic year
     a_year = models.IntegerField()
@@ -23,19 +21,16 @@ class Course(models.Model):
 
 
 class Student(models.Model):
-    name = models.CharField(max_length=200)
-    course = models.ManyToManyField(Course ,blank=True ,related_name="students")
+    First_name = models.CharField(max_length=100, null = True)
+    Last_name = models.CharField(max_length=100, null = True)
+    email = models.CharField(max_length=200, null = True)
+    student_id = models.CharField(max_length=10, null = True)
 
     def __str__(self):
-        return f"{self.id} : {self.name}"
+        return f"{self.student_id}: {self.First_name} {self.Last_name}"
+        
 
-
-class enroll(models.Model):
-    #t_code = models.ForeignKey(Course, on_delete=models.CASCADE)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    #t_semester = models.ForeignKey(Course, on_delete=models.CASCADE)
-    #t_year = models.ForeignKey(Course, on_delete=models.CASCADE)
-    students = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"{self.id} {self.students}: {self.course}"
+class Enroll(models.Model):
+    student = models.ForeignKey(Student, null=True, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, null=True, on_delete=models.CASCADE)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
