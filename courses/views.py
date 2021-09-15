@@ -5,26 +5,32 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 # Create your views here.
-
+from .decorators import unauthenticated_user, allowed_users, admin_only
 from .models import *
 
 @login_required(login_url='courses:login')
+@allowed_users(allowed_roles=['student', 'admin']) # ล็อคให้คนบทบาทstudentเท่านั้น
 def index(request): #เดี๋ยวเปลี่ยน
     context = {"courses": Course.objects.all()}
     return render(request, "courses/index.html", context)
 
 
 @login_required(login_url='courses:login')
+@admin_only
 def course(request, pk_test):
     course = Course.objects.get(id=pk_test)
     return render(request, "courses/course.html", {"course": course})
 
 
 @login_required(login_url='courses:login')
-def registration(request, student_id):
-    my_course = Course.objects.get(id=student_id)
+@allowed_users(allowed_roles=['student'])  #กำลังลอง
+def registration(request): # , student_id
+    my_course = request.user.student.enroll_set.all()
+    all_course = Course.objects.all()
+    # print(my_course)
+    # for 
     mycourse_count = my_course.count() # เด็กลงไปกี่วิชา
-    context = {"course": my_course, "mycourse_count": mycourse_count}
+    context = {"courses": my_course, "mycourse_count": mycourse_count, "all_c": all_course}
     return render(request, "courses/registration.html", context)
 
 
@@ -35,15 +41,14 @@ def courses(request):
 
 
 @login_required(login_url='courses:login')
+@admin_only
 def admincourses(request):
     context = {"courses": Course.objects.all()}
     return render(request, "courses/admincourses.html", context)
 
 
+@unauthenticated_user
 def loginPage(request):
-	if request.user.is_authenticated:
-		return redirect('courses:index')
-	else:
 		if request.method == 'POST':
 			username = request.POST['username']
 			password = request.POST['password']

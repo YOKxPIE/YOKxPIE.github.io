@@ -343,3 +343,21 @@ h1{ /* temporary */
     background: #d6e6ff;
     color: #246bdd; /* #4187f6; */
 }
+
+.containertable .content-table tbody tr .dangerbutton a {
+    position: relative;
+    display: inline-block;
+    padding: 5px 10px;
+    background: #ce1d2f;
+    /* background: rgb(185, 185, 185); */
+    color: white;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: 0.5s;
+    font-weight: bold;
+}
+
+.containertable .content-table tbody tr .dangerbutton a:hover {
+    background: #ffabab;
+    color: #ce1d2f;
+}
