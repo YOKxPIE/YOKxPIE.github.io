@@ -3,74 +3,82 @@
 {% load static %}
 
 {% block body %}
-<!-- ทดลองปุ่มดูรายละเอียดเฉยๆ เดี๋ยวออกแบบใหม่ -->
-    <!-- <h1>AdminCourses</h1> -->
-    <!-- อันเก่า
-    <ul> -->
-    <div class="container">
-        <h1>AdminCourses</h1>
-        {% for course in courses %}
-            {% if course.status %}
-                <!-- อันเก่า
-                <li><h3>{{course.c_code}}</h3> <p>{{course.c_name}}</p></li> -->
-                <div class="ticket">
-                    <div class="left">
-                        <div class="head">
-                            <div class="h-l">
-                                <h3>{{course.c_code}}</h3>
-                            </div>
-                            <div class="h-r">
-                                <h5>{{course.semester}}/{{course.a_year}}</h5>
-                            </div>
-                        </div>
-                        <div class="cname">
-                            <h3>{{course.c_name}}</h3>
-                        </div>
-                        <div class="footer">
-                            <div class="ft-l">
-                                <img src="{% static 'images/TUlogoHor.png' %}" alt="">
-                            </div>
-                            <div class="ft-r">
-                                <p>Seat No. {{course.count_stu}}/{{course.max_stu}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    {% if course.count_stu != course.max_stu %}
-                    <div class="right">
-                        <div class="head">
-                            <div class="h-l">
-                                <img src="{% static 'images/Thammasat_main_logo.png' %}" alt="">
-                            </div>
-                            <div class="h-r">
-                                <h3>{{course.c_code}}</h3>
-                            </div>
-                        </div>
-                        <!-- Full แบบเก่า -->
-                        <!-- {% if course.count_stu != course.max_stu %}-->
-                        <div class="content">
-                            <a href="{% url 'courses:acourse' course.id %}">Detail</a>  <!-- don't forget to link -->  <!-- ลองโยงปุ่มไปหน้าย่อย -->
-                        </div>
-                        <!-- {% else %}
-                        <div class="content">
-                            <p>FULL</p>
-                        </div>
-                        {% endif %} -->
-
-                        <div class="footer">
-                            <p>{{course.semester}}/{{course.a_year}}</p>
-                        </div>
-                    </div>
-                    {% else %}
-                    <div class="rightfull">
-                        <div class="content">
-                            <h3>FULL</h3>
-                        </div>
-                    </div>
-                    {% endif %}
-                </div>
-            {% endif %}
-        {% endfor %}
+<div class="navigation">
+        <ul>
+            <li class="list">
+                <a href="{% url 'courses:index' %}">
+                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                    <span class="title">Home</span>
+                </a>
+            </li>
+            <li class="list active">
+                <a href="{% url 'courses:courses' %}">
+                    <span class="icon"><ion-icon name="list-outline"></ion-icon></span>
+                    <span class="title">All courses</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="#">
+                    <span class="icon"><ion-icon name="bookmark-outline"></ion-icon></span>
+                    <span class="title">My courses</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="#">
+                    <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                    <span class="title">Profile</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="#">
+                    <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                    <span class="title">Log out</span>
+                </a>
+            </li>
+        </ul>
     </div>
-    <!-- </ul> -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+
+
+    <div class="containertable">
+        <h1>AdminCourses</h1>
+
+
+        <div class="table">
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>Course code</th>
+                    <th>Course name</th>
+                    <th>Semester</th>
+                    <th>Seat quota</th>
+                    <th>No. of student</th>
+                    <th>Status</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in courses %}
+                <tr>
+                    <td>{{course.c_code}}</td>
+                    <td>{{course.c_name}}</td>
+                    <td>{{course.semester}}/{{course.a_year}}</td>
+                    <td>{{course.max_stu}}</td>
+                    <td>{{course.count_stu}}</td>
+                    {% if course.status %}
+                    <td>OPEN</td>
+                    {% else %}
+                    <td>CLOSE</td>
+                    {% endif %}
+                    <td><a href="{% url 'courses:acourse' course.id %}">Click</a></td>
+                </tr>
+               {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    </div>
 
 {% endblock %}
