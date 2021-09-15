@@ -15,7 +15,7 @@ body {
 .navigation {
     position: relative;
     /* height: 1000px; */
-    width: 90px;
+    width: 75px;
     background: #2b343b;
     box-shadow: 10px 0 0 #4187f6;
     border-left: 10px solid #2b343b;
@@ -24,7 +24,7 @@ body {
 }
 
 .navigation:hover {
-    width: 300px;
+    width: 250px;
 }
 
 .navigation ul {
@@ -109,7 +109,7 @@ body {
 
 .container {
     position: relative;
-    width: 2000px;
+    width: 100%;
     padding: 20px;
     /*display: flex;*/
     justify-content: center;
@@ -271,3 +271,66 @@ h1{ /* temporary */
 .container .ticket .right .content a:hover {
     background: rgb(28, 134, 28);
 }
+
+/* ======================================================================================== */
+
+.containertable {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.containertable .content-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9rem;
+    min-width: 400px;
+    border-radius: 20px; /* 15px 15px 0 0 */
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+}
+
+.containertable .content-table thead tr {
+    background-color: #4187f6;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+
+.containertable .content-table th,
+.containertable .content-table td {
+    padding: 12px 15px;
+}
+
+.containertable .content-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+    background-color: white;
+}
+
+.containertable .content-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+    /* font-weight: bold; */
+    color: #4187f6;
+}
+
+.containertable .content-table tbody tr:last-of-type {
+    border-bottom: 2px solid #4187f6;
+}
+
+.containertable .content-table tbody tr a {
+    position: relative;
+    display: inline-block;
+    padding: 5px 10px;
+    background: #184fa7;
+    /* background: rgb(185, 185, 185); */
+    color: white;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: 0.5s;
+}
+
