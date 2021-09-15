@@ -13,7 +13,6 @@ urlpatterns = [
     path('admincourses/', views.admincourses, name="admincourses"),
     path('course/<str:pk_test>/', views.course, name="acourse"),
     
-    path('login/', views.loginPage, name="login"),  
-	path('logout/', views.logoutUser, name="logout"),
+    p
 
 ]
