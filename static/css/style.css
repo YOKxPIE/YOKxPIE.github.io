@@ -9,16 +9,16 @@ body {
     justify-content: left;
     align-items: top;
     min-height: 100vh;
-    background-color: #232c33;
+    background-color: #6e7475;
 }
 
 .navigation {
     position: relative;
     /* height: 1000px; */
     width: 75px;
-    background: #2b343b;
-    box-shadow: 10px 0 0 #4187f6;
-    border-left: 10px solid #2b343b;
+    background: #192123;
+    box-shadow: 10px 0 0 #ce1d2f;
+    border-left: 10px solid #192123;
     overflow-x: hidden;
     transition: width 0.5s;
 }
@@ -45,7 +45,7 @@ body {
 }
 
 .navigation ul li.active {
-    background: #4187f6;
+    background: #ce1d2f;
 }
 
 .navigation ul li.active a::before {
@@ -57,7 +57,7 @@ body {
     height: 30px;
     background: transparent;
     border-radius: 50%;
-    box-shadow: 15px 15px 0 #4187f6;
+    box-shadow: 15px 15px 0 #ce1d2f;
 }
 
 .navigation ul li.active a::after {
@@ -69,7 +69,7 @@ body {
     height: 30px;
     background: transparent;
     border-radius: 50%;
-    box-shadow: 15px -15px 0 #4187f6;
+    box-shadow: 15px -15px 0 #ce1d2f;
 }
 
 .navigation ul li a {
@@ -129,8 +129,8 @@ h1{ /* temporary */
     height: 135px;
     /*background: white;*/
     margin: 20px auto;
-    border-radius: 30px;
-    overflow: hidden;
+    /*border-radius: 30px;*/
+    /*overflow: hidden;*/
     /*box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);*/
     text-align: center;
     display: flex;
@@ -149,6 +149,8 @@ h1{ /* temporary */
     background: white;
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);
 }
 
@@ -213,6 +215,8 @@ h1{ /* temporary */
     background: white;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 30px;
+    border-top-right-radius: 30px;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);
 }
 
@@ -296,7 +300,7 @@ h1{ /* temporary */
 }
 
 .containertable .content-table thead tr {
-    background-color: #4187f6;
+    background-color: #ce1d2f;
     color: #ffffff;
     text-align: left;
     font-weight: bold;
@@ -315,22 +319,27 @@ h1{ /* temporary */
 .containertable .content-table tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;
     /* font-weight: bold; */
-    color: #4187f6;
+    color: #ce1d2f;
 }
 
 .containertable .content-table tbody tr:last-of-type {
-    border-bottom: 2px solid #4187f6;
+    border-bottom: 2px solid #ce1d2f;
 }
 
 .containertable .content-table tbody tr a {
     position: relative;
     display: inline-block;
     padding: 5px 10px;
-    background: #184fa7;
+    background: #246bdd;
     /* background: rgb(185, 185, 185); */
     color: white;
     border-radius: 10px;
     text-decoration: none;
     transition: 0.5s;
+    font-weight: bold;
 }
 
+.containertable .content-table tbody tr a:hover {
+    background: #d6e6ff;
+    color: #246bdd; /* #4187f6; */
+}
