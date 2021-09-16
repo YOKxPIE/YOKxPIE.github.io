@@ -28,7 +28,7 @@ def registration(request): # , student_id
     my_course = request.user.student.enroll_set.all()
     all_course = Course.objects.all()
     # print(my_course)
-    # for 
+    # for
     mycourse_count = my_course.count() # เด็กลงไปกี่วิชา
     context = {"courses": my_course, "mycourse_count": mycourse_count, "all_c": all_course}
     return render(request, "courses/registration.html", context)
@@ -43,9 +43,9 @@ def courses(request):
         list_of_ids.append(en_c.course.c_code)
     courses = Course.objects.exclude(c_code__in=list_of_ids)
     # print(list_of_ids)
-    # print(my_course)
+    print(my_course)
     # print(courses)
-    
+
     context = {"courses": courses}
     return render(request, "courses/courses.html", context)
 
@@ -78,8 +78,10 @@ def loginPage(request):
 def logoutUser(request):
 	logout(request)
 	return redirect('courses:login')
-	
-	
+
+
+@login_required(login_url='courses:login')   #กำลังลอง
+@allowed_users(allowed_roles=['student'])
 def deleteCourse(request, pk):
 	enroll = Enroll.objects.get(id=pk)
 	if request.method == "POST":
@@ -88,3 +90,16 @@ def deleteCourse(request, pk):
 
 	context = {'enroll':enroll}
 	return render(request, 'courses/delete.html', context)
+
+
+@login_required(login_url='courses:login')   #กำลังลอง
+@allowed_users(allowed_roles=['student'])
+def enrollCourse(request ,pk):
+	course = Course.objects.get(id=pk)
+	student = Student.objects.get(user=request.user)
+	if request.method == 'POST':
+	    enroll = Enroll.objects.create(student=student, course=course)
+	    return redirect('courses:registration')
+
+	context = {'enroll':course}
+	return render(request, 'courses/add.html', context)

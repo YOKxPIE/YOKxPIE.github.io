@@ -18,5 +18,6 @@ urlpatterns = [
 	
 	
 	path('delete_course/<str:pk>/', views.deleteCourse, name="delete_course"),
-
+    path('enroll_course/<str:pk>/', views.enrollCourse, name="enroll_course"),
+    
 ]
