@@ -23,7 +23,7 @@ def course(request, pk_test):
 
 
 @login_required(login_url='courses:login')
-@allowed_users(allowed_roles=['student'])  #กำลังลอง
+@allowed_users(allowed_roles=['student'])
 def registration(request): # , student_id
     my_course = request.user.student.enroll_set.all()
     all_course = Course.objects.all()
@@ -34,9 +34,19 @@ def registration(request): # , student_id
     return render(request, "courses/registration.html", context)
 
 
-@login_required(login_url='courses:login')
+@login_required(login_url='courses:login')   #กำลังลอง
+@allowed_users(allowed_roles=['student'])
 def courses(request):
-    context = {"courses": Course.objects.all()}
+    my_course = request.user.student.enroll_set.all()
+    list_of_ids = []
+    for en_c in my_course:
+        list_of_ids.append(en_c.course.c_code)
+    courses = Course.objects.exclude(c_code__in=list_of_ids)
+    # print(list_of_ids)
+    # print(my_course)
+    # print(courses)
+    
+    context = {"courses": courses}
     return render(request, "courses/courses.html", context)
 
 

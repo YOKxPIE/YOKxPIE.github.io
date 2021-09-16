@@ -45,7 +45,7 @@
 
     <div class="containertable">
         <h1>My Courses</h1>
-        <h1>Enrolled: {{mycourse_count}} subjects</h1> 
+        <h1>Enrolled: {{mycourse_count}} subjects</h1>
 
 
         <div class="table">
@@ -60,8 +60,8 @@
             </thead>
             <tbody>
                 {% for course in all_c %}
+                {% for en_c in courses %}
                 <tr>
-                    {% for en_c in courses %}
                     {% if en_c.course == course %}
                     <td>{{course.c_code}}</td>
                     <td>{{course.c_name}}</td>
