@@ -1,0 +1,22 @@
+{% extends "courses/layout.html" %}
+{% block body%}
+<br>
+<div class="row">
+	<div class="col-md-6">
+		<div class="card card-body">
+
+
+			<p>Are you sure you want to delete "{{enroll.course}}"?</p>
+
+			<form action="{% url 'courses:delete_course' enroll.id  %}" method="POST">
+				
+				{% csrf_token %}
+				<a class="btn btn-warning" href="{% url 'courses:registration' %}">Cancel</a>
+
+				<input class="btn btn-danger" type="submit" name="Confirm">
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

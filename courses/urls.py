@@ -15,5 +15,8 @@ urlpatterns = [
     
     path('login/', views.loginPage, name="login"),  
 	path('logout/', views.logoutUser, name="logout"),
+	
+	
+	path('delete_course/<str:pk>/', views.deleteCourse, name="delete_course"),
 
 ]

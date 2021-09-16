@@ -68,7 +68,8 @@
                     <td>{{course.semester}}/{{course.a_year}}</td>
                     <td>
                         <div class="dangerbutton">
-                            <a href="#">Delete</a>
+                           <!-- <a href="#">Delete</a> -->
+                           <a class="btn btn-sm btn-danger" href="{% url 'courses:delete_course' en_c.id %}">Delete</a>
                         </div>
                     </td>
                 </tr>

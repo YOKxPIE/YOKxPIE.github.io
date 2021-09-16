@@ -78,3 +78,13 @@ def loginPage(request):
 def logoutUser(request):
 	logout(request)
 	return redirect('courses:login')
+	
+	
+def deleteCourse(request, pk):
+	enroll = Enroll.objects.get(id=pk)
+	if request.method == "POST":
+		enroll.delete()
+		return redirect('courses:registration')
+
+	context = {'enroll':enroll}
+	return render(request, 'courses/delete.html', context)
