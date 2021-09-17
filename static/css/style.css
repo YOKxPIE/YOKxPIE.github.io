@@ -638,4 +638,9 @@ input::-moz-focus-inner {
     height: 30px;
     line-height: 30px;
     text-align: center;
+    transition: 0.5s;
+}
+
+.eula ion-icon:hover {
+    color: #ce1d2f;
 }
