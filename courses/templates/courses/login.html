@@ -59,9 +59,12 @@
 
 	<div class="page">
         <div class="containerlogin">
-          <div class="left">
+          <div class="leftlogin">
             <div class="login">Login</div>
-            <div class="eula">By logging in you agree to the ridiculously long terms that you didn't bother to read</div>
+            <div class="eula">YOKxPIE Registration</div>
+            <a class="eula" href="https://github.com/YOKxPIE/YOKxPIE.github.io"><ion-icon name="logo-github"></ion-icon></a>
+            <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    		<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
           </div>
           <div class="right">
             <svg viewBox="0 0 320 300">
@@ -90,11 +93,15 @@
               0,0 -20,1.71033 -20,25 0,24.00396 20,25 20,25 h 168.57143" />
             </svg>
             <div class="form">
-              <label for="email">Email</label>
-              <input type="email" id="email">
+
+            	<form method="POST" action="">
+						{% csrf_token %}
+
+              <label for="email">Username</label>
+              <input type="text" name="username" id="email">
               <label for="password">Password</label>
-              <input type="password" id="password">
-              <input type="submit" id="submit" value="Submit">
+              <input type="password" name="password" id="password">
+              <input type="submit" id="submit" value="Login">
             </div>
           </div>
         </div>

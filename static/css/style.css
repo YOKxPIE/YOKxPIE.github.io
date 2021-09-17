@@ -496,7 +496,7 @@ button {
 
 /* =========================================================== */
 
-@import url('https://rsms.me/inter/inter-ui.css');
+/*@import url('https://rsms.me/inter/inter-ui.css');*/
 ::selection {
   background: #2D2F36;
 }
@@ -538,7 +538,7 @@ button {
     width: 320px;
   }
 }
-.left {
+.leftlogin {
   background: white;
   height: calc(100% - 80px);
   top: 40px;
@@ -548,7 +548,7 @@ button {
   border-top-left-radius: 10px;
 }
 @media (max-width: 767px) {
-  .left {
+  .leftlogin {
     height: 100%;
     left: 20px;
     width: calc(100% - 40px);
@@ -558,13 +558,14 @@ button {
 .login {
   font-size: 50px;
   font-weight: 900;
-  margin: 50px 40px 40px;
+  margin: 30px;
 }
 .eula {
   color: #999;
   font-size: 14px;
-  line-height: 1.5;
-  margin: 40px;
+  line-height: 1;
+  /*margin: 0px;*/
+  margin-left: 40px;
 }
 .right {
   background: #192123;
@@ -623,8 +624,18 @@ input::-moz-focus-inner {
   transition: color 300ms;
 }
 #submit:focus {
-  color: #f2f2f2;
+  color: #192123;
 }
 #submit:active {
   color: #d0d0d2;
+}
+
+.eula ion-icon {
+    margin-left: 40px;
+    position: relative;
+    display: block;
+    min-width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
 }
