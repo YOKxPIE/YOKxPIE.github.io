@@ -66,12 +66,32 @@
                     <td>{{course.c_code}}</td>
                     <td>{{course.c_name}}</td>
                     <td>{{course.semester}}/{{course.a_year}}</td>
-                    <td>
-                        <div class="dangerbutton">
+                    <!--<td>-->
+                    <!--    <div class="dangerbutton">-->
                            <!-- <a href="#">Delete</a> -->
-                           <a class="btn btn-sm btn-danger" href="{% url 'courses:delete_course' en_c.id %}">Delete</a>
+                    <!--       <a class="btn btn-sm btn-danger" href="{% url 'courses:delete_course' en_c.id %}">Delete</a>-->
+                    <!--    </div>-->
+                    <!--</td>-->
+                    <td>
+                        <div class="pen">
+                        <div class="controls">
+                          <button class="modal-trigger">Click</button>
                         </div>
-                    </td>
+                        <div class="overlay cancel-modal"></div>
+                            <div class="modal-container cancel-modal">
+                                <div class="modal">
+                                <div class="text-area">
+                                    <h2>Are you sure?</h2>
+                                    <p>Are you sure you want to withdraw this course?</p>
+                                </div>
+                                <footer>
+                                    <button class="submit">Yes</button>
+                                    <button class="cancel cancel-modal">No</button>
+                                </footer>
+                                </div>
+                            </div>
+                        </div>
+                        </td>
                 </tr>
                 {% endif %}
                {% endfor %}
@@ -80,5 +100,9 @@
         </table>
     </div>
     </div>
+
+    <script src='https://s3.amazonaws.com/popmotion.io/static/dist/popmotion.min.js'></script>
+
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
 
 {% endblock %}
