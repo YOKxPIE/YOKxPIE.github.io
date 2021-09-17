@@ -87,9 +87,11 @@ def deleteCourse(request, pk):
 	if request.method == "POST":
 		enroll.delete()
 		return redirect('courses:registration')
+		
+	return redirect('courses:registration')
 
-	context = {'enroll':enroll}
-	return render(request, 'courses/delete.html', context)
+	# context = {'enroll':enroll}
+	# return render(request, 'courses/delete.html', context)
 
 
 @login_required(login_url='courses:login')   #กำลังลอง
@@ -101,5 +103,4 @@ def enrollCourse(request ,pk):
 	    enroll = Enroll.objects.create(student=student, course=course)
 	    return redirect('courses:registration')
 
-	context = {'enroll':course}
-	return render(request, 'courses/add.html', context)
+	return redirect('courses:courses')

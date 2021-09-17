@@ -86,13 +86,19 @@
                         <!-- Full แบบเก่า -->
                         <!-- {% if course.count_stu != course.max_stu %}-->
                         <div class="content">
-                             <a class="btn btn-sm btn-danger" href="{% url 'courses:enroll_course' course.id %}">Enroll</a>             <!-- don't forget to link -->
+
+                                <form action= "{% url 'courses:enroll_course' course.id %}" method="POST">
+				                    {% csrf_token %}
+
+                                <button  type="submit"><a>Enroll</a></button>
+                             <!--<a class="btn btn-sm btn-danger" href="{% url 'courses:enroll_course' course.id %}">Enroll</a>
+                            -->
+                                </form>
                         </div>
-                        <!-- {% else %}
-                        <div class="content">
-                            <p>FULL</p>
-                        </div>
-                        {% endif %} -->
+
+
+
+
 
                         <div class="footer">
                             <p>{{course.semester}}/{{course.a_year}}</p>
@@ -107,8 +113,10 @@
                     {% endif %}
                 </div>
             {% endif %}
+            {% endif %}
         {% endfor %}
     </div>
-    <!-- </ul> -->
+
+
 
 {% endblock %}

@@ -9,7 +9,7 @@
 			<p>Are you sure you want to enroll "{{enroll.c_code}}"?</p>
 
 			<form action="{% url 'courses:enroll_course' enroll.id  %}" method="POST">
-				
+
 				{% csrf_token %}
 				<a class="btn btn-warning" href="{% url 'courses:registration' %}">Cancel</a>
 
