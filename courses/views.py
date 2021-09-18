@@ -5,7 +5,9 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 # Create your views here.
+
 from .decorators import *
+from django.db.models import F
 from .models import *
 
 @login_required(login_url='courses:login')
@@ -37,8 +39,8 @@ def course(request, pk_test):
 def registration(request):
     my_course = request.user.student.enroll_set.all()
     all_course = Course.objects.all()
-  
-    mycourse_count = my_course.count() 
+
+    mycourse_count = my_course.count()
     context = {"courses": my_course, "mycourse_count": mycourse_count, "all_c": all_course}
     return render(request, "courses/registration.html", context)
 
@@ -91,11 +93,15 @@ def logoutUser(request):
 @student_only
 def deleteCourse(request, pk):
 	enroll = Enroll.objects.get(id=pk)
+	name_course = enroll.course
+	id_course = name_course.id
 	if request.method == "POST":
+		Course.objects.filter(id=id_course).update(count_stu=F('count_stu') - 1)
 		enroll.delete()
 		return redirect('courses:registration')
 
-	return redirect('courses:registration')
+	context = {'enroll':enroll}
+	return render(request, 'courses/delete.html', context)
 
 
 @login_required(login_url='courses:login')
@@ -105,6 +111,7 @@ def enrollCourse(request ,pk):
 	student = Student.objects.get(user=request.user)
 	if request.method == 'POST':
 	    enroll = Enroll.objects.create(student=student, course=course)
+	    Course.objects.filter(id=pk).update(count_stu=F('count_stu') + 1)
 	    return redirect('courses:registration')
 
 	return redirect('courses:courses')

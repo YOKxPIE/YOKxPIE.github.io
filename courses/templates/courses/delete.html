@@ -9,7 +9,7 @@
 			<p>Are you sure you want to delete "{{enroll.course}}"?</p>
 
 			<form action="{% url 'courses:delete_course' enroll.id  %}" method="POST">
-				
+
 				{% csrf_token %}
 				<a class="btn btn-warning" href="{% url 'courses:registration' %}">Cancel</a>
 
