@@ -10,16 +10,23 @@ from .models import *
 
 @login_required(login_url='courses:login')
 @allowed_users(allowed_roles=['student', 'admin']) # ล็อคให้คนบทบาทstudentเท่านั้น
-def index(request): #เดี๋ยวเปลี่ยน
-    context = {"courses": Course.objects.all()}
-    return render(request, "courses/index.html", context)
+def index(request):
+	student = request.user.student
+	context = {"student": student}
+	return render(request, "courses/index.html", context)
+	
+	
+
 
 
 @login_required(login_url='courses:login')
 @admin_only
 def course(request, pk_test):
     course = Course.objects.get(id=pk_test)
-    return render(request, "courses/course.html", {"course": course})
+    students = Student.objects.all()
+
+    context = {"course": course, "students": students}
+    return render(request, "courses/course.html", context)
 
 
 @login_required(login_url='courses:login')
@@ -87,14 +94,11 @@ def deleteCourse(request, pk):
 	if request.method == "POST":
 		enroll.delete()
 		return redirect('courses:registration')
-		
+
 	return redirect('courses:registration')
 
-	# context = {'enroll':enroll}
-	# return render(request, 'courses/delete.html', context)
 
-
-@login_required(login_url='courses:login')   
+@login_required(login_url='courses:login')
 @allowed_users(allowed_roles=['student'])
 def enrollCourse(request ,pk):
 	course = Course.objects.get(id=pk)
@@ -104,7 +108,11 @@ def enrollCourse(request ,pk):
 	    return redirect('courses:registration')
 
 	return redirect('courses:courses')
-	
-@login_required(login_url='courses:login')     #กำลังลอง เดี๋ยวให้หยกมาปรับต่อ
+
+@login_required(login_url='courses:login')
+@allowed_users(allowed_roles=['student'])
 def profile(request):
-	return render(request, "courses/profile.html")
+	student =  request.user.student
+
+	context = {"student":student}
+	return render(request, "courses/profile.html" ,context)

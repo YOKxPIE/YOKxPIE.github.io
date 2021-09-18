@@ -25,7 +25,7 @@
                 </a>
             </li>
             <li class="list">
-                <a href="#">
+                <a href="{% url 'courses:profile' %}">
                     <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
                     <span class="title">Profile</span>
                 </a>
@@ -61,18 +61,13 @@
             <tbody>
                 {% for course in all_c %}
                 {% for en_c in courses %}
-                <!--<tr>-->
+              
                     {% if en_c.course == course %}
                     <tr>
                     <td>{{course.c_code}}</td>
                     <td>{{course.c_name}}</td>
                     <td>{{course.semester}}/{{course.a_year}}</td>
-                    <!--<td>-->
-                    <!--    <div class="dangerbutton">-->
-                           <!-- <a href="#">Delete</a> -->
-                    <!--       <a class="btn btn-sm btn-danger" href="{% url 'courses:delete_course' en_c.id %}">Delete</a>-->
-                    <!--    </div>-->
-                    <!--</td>-->
+                    
                     <td>
                         <div class="pen">
                         <div class="controls">
