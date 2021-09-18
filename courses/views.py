@@ -89,7 +89,7 @@ def logoutUser(request):
 	return redirect('courses:login')
 
 
-@login_required(login_url='courses:login')   #กำลังลอง
+@login_required(login_url='courses:login')
 @student_only
 def deleteCourse(request, pk):
 	enroll = Enroll.objects.get(id=pk)

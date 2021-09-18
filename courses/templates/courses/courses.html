@@ -41,16 +41,10 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 
-
-    <!-- <h1>Courses</h1> -->
-    <!-- อันเก่า
-    <ul> -->
     <div class="container">
         <h1>Courses</h1>
         {% for course in courses %}
             {% if course.status %}
-                <!-- อันเก่า
-                <li><h3>{{course.c_code}}</h3> <p>{{course.c_name}}</p></li> -->
                 <div class="ticket">
                     <div class="left">
                         <div class="head">
@@ -83,22 +77,16 @@
                                 <h3>{{course.c_code}}</h3>
                             </div>
                         </div>
-                        <!-- Full แบบเก่า -->
-                        <!-- {% if course.count_stu != course.max_stu %}-->
+
                         <div class="content">
 
                                 <form action= "{% url 'courses:enroll_course' course.id %}" method="POST">
 				                    {% csrf_token %}
 
                                 <button  type="submit"><a>Enroll</a></button>
-                             <!--<a class="btn btn-sm btn-danger" href="{% url 'courses:enroll_course' course.id %}">Enroll</a>
-                            -->
+
                                 </form>
                         </div>
-
-
-
-
 
                         <div class="footer">
                             <p>{{course.semester}}/{{course.a_year}}</p>

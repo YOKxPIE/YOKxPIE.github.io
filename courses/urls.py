@@ -4,10 +4,9 @@ from . import views
 
 app_name="courses"
 urlpatterns = [
-    # ทำตามอาจารย์
+   
     path('', views.index, name="index"),
     path('adminhome', views.indexadmin, name="indexadmin"),
-
 
     path('registration/', views.registration, name="registration"),
     path('courses/', views.courses, name="courses"),
@@ -17,10 +16,8 @@ urlpatterns = [
     path('login/', views.loginPage, name="login"),
 	path('logout/', views.logoutUser, name="logout"),
 
-# 	path('delete_course', views.deleteCourse, name="delete_course"),
  	path('delete_course/<str:pk>/', views.deleteCourse, name="delete_course"),
     path('enroll_course/<str:pk>/', views.enrollCourse, name="enroll_course"),
 
-
-    path('profile/', views.profile, name="profile"),  # มาทำด้วยนะหยก
+    path('profile/', views.profile, name="profile"),
 ]
