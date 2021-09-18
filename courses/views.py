@@ -28,7 +28,14 @@ def indexadmin(request):
 @admin_only
 def course(request, pk_test):
     course = Course.objects.get(id=pk_test)
-    students = Student.objects.all()
+    enroll = Enroll.objects.filter(course=course)
+    list_of_ids = []
+    for stu in enroll:
+    	list_of_ids.append(stu.student.student_id)
+    students = Student.objects.filter(student_id__in=list_of_ids)
+
+    
+    print(students)
 
     context = {"course": course, "students": students}
     return render(request, "courses/course.html", context)
