@@ -6,6 +6,7 @@ app_name="courses"
 urlpatterns = [
     # ทำตามอาจารย์
     path('', views.index, name="index"),
+    path('adminhome', views.indexadmin, name="indexadmin"),
 
 
     path('registration/', views.registration, name="registration"),
