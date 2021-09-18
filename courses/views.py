@@ -94,7 +94,7 @@ def deleteCourse(request, pk):
 	# return render(request, 'courses/delete.html', context)
 
 
-@login_required(login_url='courses:login')   #กำลังลอง
+@login_required(login_url='courses:login')   
 @allowed_users(allowed_roles=['student'])
 def enrollCourse(request ,pk):
 	course = Course.objects.get(id=pk)
@@ -104,3 +104,7 @@ def enrollCourse(request ,pk):
 	    return redirect('courses:registration')
 
 	return redirect('courses:courses')
+	
+@login_required(login_url='courses:login')     #กำลังลอง เดี๋ยวให้หยกมาปรับต่อ
+def profile(request):
+	return render(request, "courses/profile.html")

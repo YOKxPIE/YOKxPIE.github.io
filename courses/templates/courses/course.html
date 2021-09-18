@@ -1,13 +1,112 @@
 {% extends "courses/layout.html" %}
 
-{% block body %}
+{% load static %}
 
-    <h1>Course: {{ course.c_code }}</h1>
-    <ul>
-        <li>{{course.c_name}}</li>
-        <li>{{course.semester}}/{{course.a_year}}</li>
-        <li>Number of students enrolled: {{course.count_stu}}</li>
-        <li>Limits: {{course.max_stu}}</li>
-    </ul>
+{% block body %}
+<div class="navigation">
+        <ul>
+            <li class="list">
+                <a href="{% url 'courses:index' %}">
+                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                    <span class="title">Home</span>
+                </a>
+            </li>
+            <li class="list active">
+                <a href="{% url 'courses:courses' %}">
+                    <span class="icon"><ion-icon name="list-outline"></ion-icon></span>
+                    <span class="title">All courses</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="#">
+                    <span class="icon"><ion-icon name="bookmark-outline"></ion-icon></span>
+                    <span class="title">My courses</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="#">
+                    <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                    <span class="title">Profile</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="{% url 'courses:logout' %}">
+                    <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                    <span class="title">Log out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<!--================================================================================-->
+
+    <div class="containercourse">
+        <div class="coursehead">
+            <div class="labelcourse"><p>{{ course.c_code }}</p></div>
+        </div>
+        <div class="pagecourse">
+            <div class="pagehead">
+                <h2>{{ course.c_code }} : {{course.c_name}}</h2>
+            </div>
+            <div class="pagebody">
+                <div class="pb-up">
+                    <div class="pb-l">
+                        <p>Semester: {{course.semester}}/{{course.a_year}}</p>
+                        {% if course.status %}
+                            <p>Status: OPEN</p>
+                        {% else %}
+                            <p>Status: CLOSED</p>
+                        {% endif %}
+                    </div>
+                    <div class="pb-r">
+                        <p>Student: {{course.count_stu}}</p>
+                        <p>Seat quota: {{course.max_stu}}</p>
+                    </div>
+                </div>
+                <div class="pb-low">
+                    <div class="containertable">
+                        <h2>List of student</h2>
+                        <div class="table">
+                            <table class="content-table">
+                                <thead>
+                                    <tr>
+                                        <th>Student ID</th>
+                                        <th>First name</th>
+                                        <th>Last name</th>
+                                        <th>Email</th>
+                                    </tr>
+                                </thead>
+
+                                <!--loop for เรียกstudent-->
+
+                                <tbody>
+                                    <tr>
+                                        <td>6210530017</td>
+                                        <td>Pramote</td>
+                                        <td>Siriparp</td>
+                                        <td>6210530017@student.tu.ac.th</td>
+                                    </tr>
+                                </tbody>
+
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--================================================================================-->
+
+    <!--<h1>Course: {{ course.c_code }}</h1>-->
+    <!--<ul>-->
+    <!--    <li>{{course.c_name}}</li>-->
+    <!--    <li>{{course.semester}}/{{course.a_year}}</li>-->
+    <!--    <li>Number of students enrolled: {{course.count_stu}}</li>-->
+    <!--    <li>Limits: {{course.max_stu}}</li>-->
+    <!--</ul>-->
 
 {% endblock %}

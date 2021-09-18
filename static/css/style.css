@@ -644,3 +644,170 @@ input::-moz-focus-inner {
 .eula ion-icon:hover {
     color: #ce1d2f;
 }
+
+/*==========================================================*/
+
+.containercourse {
+    position: relative;
+    display: flex;
+    margin: 0;
+    padding: 20px;
+    /* background: khaki; */
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.containercourse .coursehead {
+    /* background: indigo; */
+    width: calc(100% - 200px);
+}
+
+.containercourse .coursehead .labelcourse {
+    /* background: hotpink; */
+    /* background: white; */
+    background: #f1f1f1;
+    width: 100px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.containercourse .coursehead .labelcourse p {
+    font-weight: bold;
+    color: #ce1d2f;
+}
+
+.containercourse .pagecourse {
+    /* background: green; */
+    /* background: white; */
+    background: #f1f1f1;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 40px);
+    place-content: center;
+    width: calc(100% - 40px);
+    border-radius: 30px;
+    padding: 25px;
+  }
+
+.containercourse .pagecourse .pagehead {
+      /* background: lightblue; */
+      height: 10%;
+      text-align: left;
+      /* border-bottom: 2px solid #e5e5e5; */
+      border-bottom: 2px solid #c2c2c2;
+}
+
+.containercourse .pagecourse .pagehead h2{
+    margin-left: 40px;
+    margin-top: 10px;
+    color: #ce1d2f;
+}
+
+.containercourse .pagecourse .pagebody {
+    /* background: lightblue; */
+    height: 85%;
+    text-align: left;
+}
+
+.containercourse .pagecourse .pagebody .pb-up {
+    display: flex;
+    /* background: greenyellow; */
+}
+
+.containercourse .pagecourse .pagebody .pb-up .pb-l {
+    /* background: cadetblue; */
+    width: 50%;
+    height: 105px;
+    padding: 20px;
+}
+
+.containercourse .pagecourse .pagebody .pb-up .pb-l p {
+    color: rgb(77, 77, 77);
+    font-size: 18px;
+    margin: 10px;
+    margin-left: 30px;
+}
+
+.containercourse .pagecourse .pagebody .pb-up .pb-r {
+    /* background: red; */
+    width: 50%;
+    height: 105px;
+    padding: 20px;
+}
+
+.containercourse .pagecourse .pagebody .pb-up .pb-r p {
+    color: rgb(77, 77, 77);
+    font-size: 18px;
+    margin: 10px;
+    margin-left: 30px;
+}
+
+.containercourse .pagecourse .pagebody .pb-low {
+    /* background: hotpink; */
+    width: 100%;
+}
+
+.containercourse .pagecourse .pagebody .pb-low .containertable h2 {
+    color: #ce1d2f;
+}
+
+/*==================================================================================*/
+
+.containerstucard {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+    text-align: center;
+    transform-style: preserve-3d;
+}
+
+.containerstucard .stucard {
+    position: relative;
+    width: 500px;
+    height: 318px;
+    margin: 60px 0;
+    border-radius: 35px;
+    overflow: hidden;
+    /* background: #000; */
+    /* box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25); */
+    box-shadow: 0px 40px 20px -20px rgba(0, 0, 0, 0.25);
+    transform-style: preserve-3d;
+}
+.containerstucard .stucard .card-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.containerstucard .stucard .card-image img {
+    width: 100%;
+}
+
+.containerstucard .stucard .card-text {
+    position: absolute;
+    top: 25%;
+    left: 60px;
+    right: 60px;
+    transform-style: preserve-3d;
+}
+
+.containerstucard .stucard .card-text h2 {
+    color: white;
+    margin: 10px;
+}
+.containerstucard .stucard .card-text p {
+    color: white;
+    margin: 10px;
+}
