@@ -44,12 +44,9 @@ def course(request, pk_test):
 def registration(request):
     my_course = request.user.student.enroll_set.all()
     all_course = Course.objects.all()
-    list_of_ids = []
-    for en_c in my_course:
-    	list_of_ids.append(en_c.course.c_code)
-    enrolled = Course.objects.filter(c_code__in=list_of_ids)
+
     mycourse_count = my_course.count()
-    context = {"courses": enrolled, "mycourse_count": mycourse_count, "all_c":all_course}
+    context = {"courses": my_course, "mycourse_count": mycourse_count, "all_c": all_course}
     return render(request, "courses/registration.html", context)
 
 
