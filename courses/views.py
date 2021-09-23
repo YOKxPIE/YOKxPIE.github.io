@@ -34,8 +34,6 @@ def course(request, pk_test):
     	list_of_ids.append(stu.student.student_id)
     students = Student.objects.filter(student_id__in=list_of_ids)
 
-    
-    print(students)
 
     context = {"course": course, "students": students}
     return render(request, "courses/course.html", context)
@@ -60,7 +58,6 @@ def courses(request):
     for en_c in my_course:
         list_of_ids.append(en_c.course.c_code)
     courses = Course.objects.exclude(c_code__in=list_of_ids)
-    print(my_course)
 
     context = {"courses": courses}
     return render(request, "courses/courses.html", context)
@@ -99,7 +96,7 @@ def logoutUser(request):
 @login_required(login_url='courses:login')
 @student_only
 def deleteCourse(request, pk):
-	enroll = Enroll.objects.get(id=pk)
+	enroll = Enroll.objects.get(course.c_code==pk)
 	name_course = enroll.course
 	id_course = name_course.id
 	if request.method == "POST":
@@ -107,8 +104,7 @@ def deleteCourse(request, pk):
 		enroll.delete()
 		return redirect('courses:registration')
 
-	context = {'enroll':enroll}
-	return render(request, 'courses/delete.html', context)
+
 
 
 @login_required(login_url='courses:login')
