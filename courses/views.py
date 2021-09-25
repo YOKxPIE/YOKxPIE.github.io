@@ -96,7 +96,7 @@ def logoutUser(request):
 @login_required(login_url='courses:login')
 @student_only
 def deleteCourse(request, pk):
-	enroll = Enroll.objects.get(course.c_code==pk)
+	enroll = Enroll.objects.get(id=pk)
 	name_course = enroll.course
 	id_course = name_course.id
 	if request.method == "POST":
