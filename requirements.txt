@@ -7,3 +7,4 @@ sqlparse==0.4.2
 gunicorn
 django-heroku
 whitenoise
+coverage==5.5
