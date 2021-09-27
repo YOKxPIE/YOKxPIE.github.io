@@ -5,6 +5,8 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth.hashers import make_password
 from django.urls import reverse
 
+from django.shortcuts import resolve_url
+
 class ViewTestCase(TestCase):
 
     # def setUp(self):
@@ -405,25 +407,25 @@ class ViewTestCase(TestCase):
         group_s = Group.objects.get(name="student")
         self.student = Student.objects.create(user=self.user, First_name="userFirstname", Last_name="userLastname", email="user@example.com", student_id="6210000000")
         self.user.groups.add(group_s)
-        response = self.c.post(reverse('courses:login'), {'username': "test", 'password': "test1"})
-        self.assertEqual(response.status_code, 200) #login ไม่สำเร็จ(รหัสผิด) จึงอยู่หน้าเดิมให้ใส่รหัสใหม่
+#         response = self.c.post(reverse('courses:login'), {'username': "test", 'password': "test1"})
+#         self.assertEqual(response.status_code, 200) #login ไม่สำเร็จ(รหัสผิด) จึงอยู่หน้าเดิมให้ใส่รหัสใหม่
 
-    def test_index_context_view_stu1(self):
-        c = Client()
-        self.group = Group(name="student")
-        self.group.save()
-        self.c = Client()
-        self.user = User.objects.create_user(username="test", email="test@test.com", password="test")
-        user_2 = User.objects.create_user(username="test2", email="test2@test.com", password="test2")
-        group_s = Group.objects.get(name="student")
-        self.student = Student.objects.create(user=self.user, First_name="userFirstname", Last_name="userLastname", email="user@example.com", student_id="6210000000")
-        Student.objects.create(user=user_2, First_name="user2Firstname", Last_name="user2Lastname", email="user2@example.com", student_id="6210000001")
-        self.user.groups.add(group_s)
-        self.c.login(username='test', password='test')
-        response = self.c.get(reverse('courses:index'))
-        print("res>"+str(response.context['student']))
-        print("stu>"+str(self.student))
-        self.assertEqual(response.context['student'], self.student)
+#     def test_index_context_view_stu1(self):
+#         c = Client()
+#         self.group = Group(name="student")
+#         self.group.save()
+#         self.c = Client()
+#         self.user = User.objects.create_user(username="test", email="test@test.com", password="test")
+#         user_2 = User.objects.create_user(username="test2", email="test2@test.com", password="test2")
+#         group_s = Group.objects.get(name="student")
+#         self.student = Student.objects.create(user=self.user, First_name="userFirstname", Last_name="userLastname", email="user@example.com", student_id="6210000000")
+#         Student.objects.create(user=user_2, First_name="user2Firstname", Last_name="user2Lastname", email="user2@example.com", student_id="6210000001")
+#         self.user.groups.add(group_s)
+#         self.c.login(username='test', password='test')
+#         response = self.c.get(reverse('courses:index'))
+#         print("res>"+str(response.context['student']))
+#         print("stu>"+str(self.student))
+#         self.assertEqual(response.context['student'], self.student)
 
     def test_index_context_view_stu2(self):
         c = Client()
@@ -438,6 +440,140 @@ class ViewTestCase(TestCase):
         self.user.groups.add(group_s)
         self.c.login(username='test2', password='test2')
         response = self.c.get(reverse('courses:index'))
-        print("res>"+str(response.context['student']))
-        print("stu>"+str(self.student))
+        # print("res>"+str(response.context['student']))
+        # print("stu>"+str(self.student))
         self.assertEqual(response.context['student'], self.student)
+
+
+    def test_courses_context(self):
+        c = Client()
+        self.group = Group(name="student")
+        self.group.save()
+        self.c = Client()
+        self.user = User.objects.create_user(username="test", email="test@test.com", password="test")
+        group_s = Group.objects.get(name="student")
+        self.student = Student.objects.create(user=self.user, First_name="userFirstname", Last_name="userLastname", email="user@example.com", student_id="6210000000")
+        self.user.groups.add(group_s)
+        self.c.login(username='test', password='test')
+        Course.objects.create(c_code="TU00" ,c_name="AA" ,semester="0" ,a_year="2500" ,count_stu="0" ,max_stu="2" ,status=True)
+        Course.objects.create(c_code="TU01" ,c_name="AA" ,semester="0" ,a_year="2500" ,count_stu="0" ,max_stu="2" ,status=True)
+        response = self.c.get(reverse('courses:courses'))
+        # print("res>"+str(response.context['courses']))
+        # print("stu>"+str(Course.objects.all()))
+        self.assertEqual(list(response.context['courses']), list(Course.objects.all()))
+
+
+    # def test_student_can_enroll(self):    #มีเรื่องส่งpost
+    #     c = Client()
+    #     self.group = Group(name="student")
+    #     self.group.save()
+    #     self.c = Client()
+    #     self.user = User.objects.create_user(username="test", email="test@test.com", password="test")
+    #     group_s = Group.objects.get(name="student")
+    #     self.student = Student.objects.create(user=self.user, First_name="userFirstname", Last_name="userLastname", email="user@example.com", student_id="6210000000")
+    #     self.user.groups.add(group_s)
+    #     self.c.login(username='test', password='test')
+    #     course1 = Course.objects.create(c_code="TU00" ,c_name="AA" ,semester="0" ,a_year="2500" ,count_stu="0" ,max_stu="2" ,status=True)
+
+
+    #     response = self.c.get(reverse('courses:enroll_course' ,course1.id))
+    #     print("res>"+str(course1.id))
+    #     enroll = Enroll.objects.get(student=self.student)
+    #     print("res>"+str(eroll.course))
+    #     self.assertEqual(eroll.course)
+
+
+    # def test_can_delete_course(self):
+    #     pass
+
+
+    def test_profile_context(self):
+        c = Client()
+        self.group = Group(name="student")
+        self.group.save()
+        self.c = Client()
+        self.user = User.objects.create_user(username="test", email="test@test.com", password="test")
+        group_s = Group.objects.get(name="student")
+        self.student = Student.objects.create(user=self.user, First_name="userFirstname", Last_name="userLastname", email="user@example.com", student_id="6210000000")
+        self.user.groups.add(group_s)
+        self.c.login(username='test', password='test')
+        response = self.c.get(reverse('courses:profile'))
+        # print("res>"+str(response.context['student']))
+        # print("stu>"+str(self.student))
+        self.assertEqual(response.context['student'], self.student)
+
+
+    def test_registration_context(self):
+        c = Client()
+        self.group = Group(name="student")
+        self.group.save()
+        self.c = Client()
+        self.user = User.objects.create_user(username="test", email="test@test.com", password="test")
+        group_s = Group.objects.get(name="student")
+        self.student = Student.objects.create(user=self.user, First_name="userFirstname", Last_name="userLastname", email="user@example.com", student_id="6210000000")
+        self.user.groups.add(group_s)
+        self.c.login(username='test', password='test')
+        course1 = Course.objects.create(c_code="TU01" ,c_name="AA" ,semester="0" ,a_year="2500" ,count_stu="0" ,max_stu="2" ,status=True)
+        course2 = Course.objects.create(c_code="TU00" ,c_name="AA" ,semester="0" ,a_year="2500" ,count_stu="0" ,max_stu="2" ,status=True)
+        Enroll.objects.create(student=self.student, course=course1)
+        Enroll.objects.create(student=self.student, course=course2)
+        response = self.c.get(reverse('courses:registration'))
+
+        # print("res>"+str(response.context['courses']))
+        # print("stu>"+str(self.student.enroll_set.all()))
+        self.assertEqual(list(response.context['courses']), list(self.student.enroll_set.all()))
+        self.assertEqual(response.context['courses'].count(), self.student.enroll_set.all().count())
+
+
+    def test_admincourses_context(self):
+        c = Client()
+        self.group = Group(name="admin")
+        self.group.save()
+        self.c = Client()
+        self.user = User.objects.create_user(username="test", email="test@test.com", password="test")
+        group_s = Group.objects.get(name="admin")
+        Course.objects.create(c_code="TU01" ,c_name="AA" ,semester="0" ,a_year="2500" ,count_stu="0" ,max_stu="2" ,status=True)
+        Course.objects.create(c_code="TU00" ,c_name="AA" ,semester="0" ,a_year="2500" ,count_stu="0" ,max_stu="2" ,status=True)
+        self.user.groups.add(group_s)
+        self.c.login(username='test', password='test')
+        response = self.c.get(reverse('courses:admincourses'))
+        # print("res>"+str(response.context['courses']))
+        # print("stu>"+str(Course.objects.all()))
+        self.assertEqual(list(response.context['courses']), list(Course.objects.all()))
+
+
+    def test_course_context(self):
+        c = Client()
+        self.group = Group(name="admin")
+        self.group.save()
+        self.c = Client()
+        self.user = User.objects.create_user(username="test", email="test@test.com", password="test")
+        group_s = Group.objects.get(name="admin")
+        self.user.groups.add(group_s)
+        self.c.login(username='test', password='test')
+
+        course1 = Course.objects.create(c_code="TU00" ,c_name="AA" ,semester="0" ,a_year="2500" ,count_stu="0" ,max_stu="2" ,status=True)
+        stu1 = Student.objects.create(First_name="userFirstname1", Last_name="userLastname1", email="user1@example.com", student_id="6210000000")
+        stu2 = Student.objects.create(First_name="userFirstname2", Last_name="userLastname2", email="user2@example.com", student_id="6210000001")
+        Enroll.objects.create(student=stu1, course=course1)
+        Enroll.objects.create(student=stu2, course=course1)
+
+        response = self.c.get(reverse('courses:acourse'  ,args=(course1.id,)))
+        # print("res>"+str(course1))
+        # print("res>"+str(response.context['course']))
+        enroll = Enroll.objects.filter(course=course1)
+        # print("res>"+str(enroll))
+        list_students_in_course = []
+        for stu in enroll:
+    	    list_students_in_course.append(stu.student)
+
+        self.assertEqual(response.context['course'], course1)
+        self.assertEqual(list(response.context['students']) ,list_students_in_course)
+
+
+
+
+
+
+
+
