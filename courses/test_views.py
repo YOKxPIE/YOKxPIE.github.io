@@ -322,7 +322,7 @@ class ViewTestCase(TestCase):
         self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302 โดน redirect('courses:indexadmin')
 
 
-# ========================ตรงนี้ลองแล้วยัง fail อยู่==============================
+
     def test_deleteCourse_view_stu_w(self):
         c = Client()
         self.group = Group(name="student")
@@ -339,37 +339,37 @@ class ViewTestCase(TestCase):
         response = self.c.post(reverse('courses:delete_course', args=(en.id,)))
         self.assertEqual(Enroll.objects.all().count(), 0) #studentกดปุ่มwithdraw
         self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302 โดนredirect('courses:registration')
+# #========================ตรงนี้ลองแล้วยัง fail อยู่==========================
+#     # def test_deleteCourse_view_stu(self):
+#     #     c = Client()
+#     #     self.group = Group(name="student")
+#     #     self.group.save()
+#     #     self.c = Client()
+#     #     self.user = User.objects.create_user(username="test", email="test@test.com", password="test")
+#     #     group_s = Group.objects.get(name="student")
+#     #     self.student = Student.objects.create(user=self.user, First_name="userFirstname", Last_name="userLastname", email="user@example.com", student_id="6210000000")
+#     #     self.user.groups.add(group_s)
+#     #     self.c.login(username='test', password='test')
+#     #     course = Course.objects.create(c_code="CN000", c_name="TEST", semester=1, a_year=2564)
+#     #     en = Enroll.objects.create(student=self.student, course=course)
+#     #     self.assertEqual(Enroll.objects.all().count(), 1)
+#     #     response = self.c.get(reverse('courses:delete_course', args=(en.id,)))
+#     #     self.assertEqual(Enroll.objects.all().count(), 1) #studentไม่กดปุ่มwithdraw
+#     #     self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302 โดนredirect('courses:registration')
 
-    # def test_deleteCourse_view_stu(self):
-    #     c = Client()
-    #     self.group = Group(name="student")
-    #     self.group.save()
-    #     self.c = Client()
-    #     self.user = User.objects.create_user(username="test", email="test@test.com", password="test")
-    #     group_s = Group.objects.get(name="student")
-    #     self.student = Student.objects.create(user=self.user, First_name="userFirstname", Last_name="userLastname", email="user@example.com", student_id="6210000000")
-    #     self.user.groups.add(group_s)
-    #     self.c.login(username='test', password='test')
-    #     course = Course.objects.create(c_code="CN000", c_name="TEST", semester=1, a_year=2564)
-    #     en = Enroll.objects.create(student=self.student, course=course)
-    #     self.assertEqual(Enroll.objects.all().count(), 1)
-    #     response = self.c.get(reverse('courses:delete_course', args=(en.id,)))
-    #     self.assertEqual(Enroll.objects.all().count(), 1) #studentไม่กดปุ่มwithdraw
-    #     self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302 โดนredirect('courses:registration')
-
-    # def test_deleteCourse_view_ad(self):
-    #     c = Client()
-    #     self.group = Group(name="admin")
-    #     self.group.save()
-    #     self.c = Client()
-    #     self.user = User.objects.create_user(username="ad", email="ad@test.com", password="testad")
-    #     group_ad = Group.objects.get(name="admin")
-    #     self.user.groups.add(group_ad)
-    #     self.c.login(username='ad', password='testad')
-    #     course = Course.objects.create(c_code="CN000", c_name="TEST", semester=1, a_year=2564)
-    #     response = self.c.get(reverse('courses:delete_course', args=(course.id,)))
-    #     self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302 โดน redirect('courses:indexadmin')
-# ========================ตรงนี้ลองแล้วยัง fail อยู่==============================
+#     # def test_deleteCourse_view_ad(self):
+#     #     c = Client()
+#     #     self.group = Group(name="admin")
+#     #     self.group.save()
+#     #     self.c = Client()
+#     #     self.user = User.objects.create_user(username="ad", email="ad@test.com", password="testad")
+#     #     group_ad = Group.objects.get(name="admin")
+#     #     self.user.groups.add(group_ad)
+#     #     self.c.login(username='ad', password='testad')
+#     #     course = Course.objects.create(c_code="CN000", c_name="TEST", semester=1, a_year=2564)
+#     #     response = self.c.get(reverse('courses:delete_course', args=(course.id,)))
+#     #     self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302 โดน redirect('courses:indexadmin')
+# #========================ตรงนี้ลองแล้วยัง fail อยู่==============================
 
 
 
@@ -407,3 +407,37 @@ class ViewTestCase(TestCase):
         self.user.groups.add(group_s)
         response = self.c.post(reverse('courses:login'), {'username': "test", 'password': "test1"})
         self.assertEqual(response.status_code, 200) #login ไม่สำเร็จ(รหัสผิด) จึงอยู่หน้าเดิมให้ใส่รหัสใหม่
+
+    def test_index_context_view_stu1(self):
+        c = Client()
+        self.group = Group(name="student")
+        self.group.save()
+        self.c = Client()
+        self.user = User.objects.create_user(username="test", email="test@test.com", password="test")
+        user_2 = User.objects.create_user(username="test2", email="test2@test.com", password="test2")
+        group_s = Group.objects.get(name="student")
+        self.student = Student.objects.create(user=self.user, First_name="userFirstname", Last_name="userLastname", email="user@example.com", student_id="6210000000")
+        Student.objects.create(user=user_2, First_name="user2Firstname", Last_name="user2Lastname", email="user2@example.com", student_id="6210000001")
+        self.user.groups.add(group_s)
+        self.c.login(username='test', password='test')
+        response = self.c.get(reverse('courses:index'))
+        print("res>"+str(response.context['student']))
+        print("stu>"+str(self.student))
+        self.assertEqual(response.context['student'], self.student)
+
+    def test_index_context_view_stu2(self):
+        c = Client()
+        self.group = Group(name="student")
+        self.group.save()
+        self.c = Client()
+        user_1 = User.objects.create_user(username="test", email="test@test.com", password="test")
+        self.user = User.objects.create_user(username="test2", email="test2@test.com", password="test2")
+        group_s = Group.objects.get(name="student")
+        Student.objects.create(user=user_1, First_name="userFirstname", Last_name="userLastname", email="user@example.com", student_id="6210000000")
+        self.student = Student.objects.create(user=self.user, First_name="user2Firstname", Last_name="user2Lastname", email="user2@example.com", student_id="6210000001")
+        self.user.groups.add(group_s)
+        self.c.login(username='test2', password='test2')
+        response = self.c.get(reverse('courses:index'))
+        print("res>"+str(response.context['student']))
+        print("stu>"+str(self.student))
+        self.assertEqual(response.context['student'], self.student)
