@@ -24,7 +24,6 @@ class ViewTestCase(TestCase):
 
 
     def test_index_view_stu(self):
-        c = Client()
         self.group = Group(name="student")
         self.group.save()
         self.c = Client()
@@ -36,8 +35,8 @@ class ViewTestCase(TestCase):
         response = self.c.get(reverse('courses:index'))
         self.assertEqual(response.status_code, 200) #ไปถูกที่=200
 
+
     def test_index_view_ad(self):
-        c = Client()
         self.group = Group(name="admin")
         self.group.save()
         self.c = Client()
@@ -47,11 +46,9 @@ class ViewTestCase(TestCase):
         self.c.login(username='ad', password='testad')
         response = self.c.get(reverse('courses:index'))
         self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302
-
 
 
     def test_indexadmin_view_stu(self):
-        c = Client()
         self.group = Group(name="student")
         self.group.save()
         self.c = Client()
@@ -63,8 +60,8 @@ class ViewTestCase(TestCase):
         response = self.c.get(reverse('courses:indexadmin'))
         self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302
 
+
     def test_indexadmin_view_ad(self):
-        c = Client()
         self.group = Group(name="admin")
         self.group.save()
         self.c = Client()
@@ -76,9 +73,7 @@ class ViewTestCase(TestCase):
         self.assertEqual(response.status_code, 200) #ไปถูกที่=200
 
 
-
     def test_courses_view_stu(self):
-        c = Client()
         self.group = Group(name="student")
         self.group.save()
         self.c = Client()
@@ -92,8 +87,8 @@ class ViewTestCase(TestCase):
         response = self.c.get(reverse('courses:courses'))
         self.assertEqual(response.status_code, 200) #ไปถูกที่=200
 
+
     def test_courses_view_ad(self):
-        c = Client()
         self.group = Group(name="admin")
         self.group.save()
         self.c = Client()
@@ -105,9 +100,7 @@ class ViewTestCase(TestCase):
         self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302
 
 
-
     def test_registration_view_stu(self):
-        c = Client()
         self.group = Group(name="student")
         self.group.save()
         self.c = Client()
@@ -119,8 +112,8 @@ class ViewTestCase(TestCase):
         response = self.c.get(reverse('courses:registration'))
         self.assertEqual(response.status_code, 200) #ไปถูกที่=200
 
+
     def test_registration_view_ad(self):
-        c = Client()
         self.group = Group(name="admin")
         self.group.save()
         self.c = Client()
@@ -130,11 +123,9 @@ class ViewTestCase(TestCase):
         self.c.login(username='ad', password='testad')
         response = self.c.get(reverse('courses:registration'))
         self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302
-
 
 
     def test_profile_view_stu(self):
-        c = Client()
         self.group = Group(name="student")
         self.group.save()
         self.c = Client()
@@ -146,8 +137,8 @@ class ViewTestCase(TestCase):
         response = self.c.get(reverse('courses:profile'))
         self.assertEqual(response.status_code, 200) #ไปถูกที่=200
 
+
     def test_profile_view_ad(self):
-        c = Client()
         self.group = Group(name="admin")
         self.group.save()
         self.c = Client()
@@ -157,11 +148,9 @@ class ViewTestCase(TestCase):
         self.c.login(username='ad', password='testad')
         response = self.c.get(reverse('courses:profile'))
         self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302
-
 
 
     def test_admincourses_view_stu(self):
-        c = Client()
         self.group = Group(name="student")
         self.group.save()
         self.c = Client()
@@ -173,8 +162,8 @@ class ViewTestCase(TestCase):
         response = self.c.get(reverse('courses:admincourses'))
         self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302
 
+
     def test_admincourses_view_ad(self):
-        c = Client()
         self.group = Group(name="admin")
         self.group.save()
         self.c = Client()
@@ -184,11 +173,9 @@ class ViewTestCase(TestCase):
         self.c.login(username='ad', password='testad')
         response = self.c.get(reverse('courses:admincourses'))
         self.assertEqual(response.status_code, 200) #ไปถูกที่=200
-
 
 
     def test_unauthenticated_view_stu(self):
-        c = Client()
         self.group = Group(name="student")
         self.group.save()
         self.c = Client()
@@ -200,8 +187,8 @@ class ViewTestCase(TestCase):
         response = self.c.get(reverse('courses:login'))
         self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302
 
+
     def test_unauthenticated_view_ad(self):
-        c = Client()
         self.group = Group(name="admin")
         self.group.save()
         self.c = Client()
@@ -212,16 +199,14 @@ class ViewTestCase(TestCase):
         response = self.c.get(reverse('courses:login'))
         self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302
 
+
     def test_unauthenticated_view_unauthenticated(self):
-        c = Client()
         self.c = Client()
         response = self.c.get(reverse('courses:login'))
         self.assertEqual(response.status_code, 200) #ไปถูกที่=200
 
 
-
     def test_course_view_stu(self):
-        c = Client()
         self.group = Group(name="student")
         self.group.save()
         self.c = Client()
@@ -234,8 +219,8 @@ class ViewTestCase(TestCase):
         response = self.c.get(reverse('courses:acourse', args=(course.id,)))
         self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302
 
+
     def test_course_view_ad(self):
-        c = Client()
         self.group = Group(name="admin")
         self.group.save()
         self.c = Client()
@@ -251,9 +236,7 @@ class ViewTestCase(TestCase):
         self.assertEqual(response.status_code, 200) #ไปถูกที่=200
 
 
-
     def test_logout_view_stu(self):
-        c = Client()
         self.group = Group(name="student")
         self.group.save()
         self.c = Client()
@@ -265,8 +248,8 @@ class ViewTestCase(TestCase):
         response = self.c.get(reverse('courses:logout'))
         self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302
 
+
     def test_logout_view_ad(self):
-        c = Client()
         self.group = Group(name="admin")
         self.group.save()
         self.c = Client()
@@ -278,9 +261,7 @@ class ViewTestCase(TestCase):
         self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302
 
 
-
     def test_enrollCourse_view_stu_enroll(self):
-        c = Client()
         self.group = Group(name="student")
         self.group.save()
         self.c = Client()
@@ -295,8 +276,8 @@ class ViewTestCase(TestCase):
         self.assertEqual(Enroll.objects.all().count(), 1) #studentกดปุ่มenroll มีobject enrollเกิดมาอันนึง
         self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302 โดนredirect('courses:registration')
 
+
     def test_enrollCourse_view_stu(self):
-        c = Client()
         self.group = Group(name="student")
         self.group.save()
         self.c = Client()
@@ -310,8 +291,8 @@ class ViewTestCase(TestCase):
         self.assertEqual(Enroll.objects.all().count(), 0) #studentไม่กดปุ่มenroll ไม่มีobject enrollเกิดขึ้น
         self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302 โดนredirect('courses:registration')
 
+
     def test_enrollCourse_view_ad(self):
-        c = Client()
         self.group = Group(name="admin")
         self.group.save()
         self.c = Client()
@@ -324,9 +305,7 @@ class ViewTestCase(TestCase):
         self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302 โดน redirect('courses:indexadmin')
 
 
-
     def test_deleteCourse_view_stu_w(self):
-        c = Client()
         self.group = Group(name="student")
         self.group.save()
         self.c = Client()
@@ -376,7 +355,6 @@ class ViewTestCase(TestCase):
 
 
     def test_login_view_stu_succ(self):
-        c = Client()
         self.group = Group(name="student")
         self.group.save()
         self.c = Client()
@@ -387,8 +365,8 @@ class ViewTestCase(TestCase):
         response = self.c.post(reverse('courses:login'), {'username': "test", 'password': "test"})
         self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302
 
+
     def test_login_view_ad_succ(self):
-        c = Client()
         self.group = Group(name="admin")
         self.group.save()
         self.c = Client()
@@ -398,8 +376,8 @@ class ViewTestCase(TestCase):
         response = self.c.post(reverse('courses:login'), {'username': 'ad', 'password': 'testad'})
         self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302
 
+
     def test_login_view_fail(self):
-        c = Client()
         self.group = Group(name="student")
         self.group.save()
         self.c = Client()
@@ -428,7 +406,6 @@ class ViewTestCase(TestCase):
 #         self.assertEqual(response.context['student'], self.student)
 
     def test_index_context_view_stu2(self):
-        c = Client()
         self.group = Group(name="student")
         self.group.save()
         self.c = Client()
@@ -446,7 +423,6 @@ class ViewTestCase(TestCase):
 
 
     def test_courses_context(self):
-        c = Client()
         self.group = Group(name="student")
         self.group.save()
         self.c = Client()
@@ -463,32 +439,80 @@ class ViewTestCase(TestCase):
         self.assertEqual(list(response.context['courses']), list(Course.objects.all()))
 
 
-    # def test_student_can_enroll(self):    #มีเรื่องส่งpost
-    #     c = Client()
-    #     self.group = Group(name="student")
-    #     self.group.save()
-    #     self.c = Client()
-    #     self.user = User.objects.create_user(username="test", email="test@test.com", password="test")
-    #     group_s = Group.objects.get(name="student")
-    #     self.student = Student.objects.create(user=self.user, First_name="userFirstname", Last_name="userLastname", email="user@example.com", student_id="6210000000")
-    #     self.user.groups.add(group_s)
-    #     self.c.login(username='test', password='test')
-    #     course1 = Course.objects.create(c_code="TU00" ,c_name="AA" ,semester="0" ,a_year="2500" ,count_stu="0" ,max_stu="2" ,status=True)
+    def test_student_can_enroll(self):    #มีเรื่องส่งpost
+        self.group = Group(name="student")
+        self.group.save()
+        self.c = Client()
+        self.user = User.objects.create_user(username="test", email="test@test.com", password="test")
+        group_s = Group.objects.get(name="student")
+        self.student = Student.objects.create(user=self.user, First_name="userFirstname", Last_name="userLastname", email="user@example.com", student_id="6210000000")
+        self.user.groups.add(group_s)
+        self.c.login(username='test', password='test')
+        course1 = Course.objects.create(c_code="TU00", c_name="AA", semester="0", a_year="2500", count_stu="0", max_stu="2", status=True)
+
+        response = self.c.post(reverse('courses:enroll_course', args=(course1.id,)))
+
+        enroll = Enroll.objects.get(student=self.student)
+        course = Course.objects.filter(id=course1.id)
+        for c in course:
+            # print(c.count_stu)
+            self.assertEqual(c.count_stu, 1)   #จำนวนที่นั่งในวิชาเพิ่มหนึ่งค่า
+        # print("res>"+str(course))
+        self.assertEqual(enroll.course, course1)    #สามารถลงทะเบียนได้มีตาราง enrollตรงกับวิชาที่ลง
+        self.assertEqual(response.status_code, 302) #ลงเสร็จแล้วกลับหน้าถูก
 
 
-    #     response = self.c.get(reverse('courses:enroll_course' ,course1.id))
-    #     print("res>"+str(course1.id))
-    #     enroll = Enroll.objects.get(student=self.student)
-    #     print("res>"+str(eroll.course))
-    #     self.assertEqual(eroll.course)
+    def test_student_can_not_enroll(self):
+        self.group = Group(name="student")
+        self.group.save()
+        self.c = Client()
+        self.user = User.objects.create_user(username="test", email="test@test.com", password="test")
+        group_s = Group.objects.get(name="student")
+        self.student = Student.objects.create(user=self.user, First_name="userFirstname", Last_name="userLastname", email="user@example.com", student_id="6210000000")
+        self.user.groups.add(group_s)
+        self.c.login(username='test', password='test')
+        course1 = Course.objects.create(c_code="TU00", c_name="AA", semester="0", a_year="2500", count_stu="0", max_stu="2", status=True)
+
+        response = self.c.get(reverse('courses:enroll_course', args=(course1.id,)))
+        enroll = Enroll.objects.all()
+        course = Course.objects.filter(id=course1.id)
+        for c in course:
+            # print(c.count_stu)
+            self.assertEqual(c.count_stu, 0)
+
+        # print("res>"+str(enroll))
+        # print("res>"+str(response))
+        self.assertEqual(enroll.count(), 0)    #ไม่มีวิชาในenroll
+        self.assertEqual(response.status_code, 302)
 
 
-    # def test_can_delete_course(self):
-    #     pass
+    def test_can_delete_course(self):
+        self.group = Group(name="student")
+        self.group.save()
+        self.c = Client()
+        self.user = User.objects.create_user(username="test", email="test@test.com", password="test")
+        group_s = Group.objects.get(name="student")
+        self.student = Student.objects.create(user=self.user, First_name="userFirstname", Last_name="userLastname", email="user@example.com", student_id="6210000000")
+        self.user.groups.add(group_s)
+        self.c.login(username='test', password='test')
+        course1 = Course.objects.create(c_code="TU00", c_name="AA", semester="0", a_year="2500", count_stu="1", max_stu="2", status=True)
+        course2 = Course.objects.create(c_code="TU01", c_name="BB", semester="0", a_year="2500", count_stu="1", max_stu="2", status=True)
+        enroll = Enroll.objects.create(student=self.student, course=course1)
+        Enroll.objects.create(student=self.student, course=course2)
+
+        response = self.c.post(reverse('courses:delete_course', args=(enroll.id,)))
+        enroll_all = Enroll.objects.all()
+        for e in enroll_all:
+            self.assertEqual(e.course, course2)
+
+        course1_af_withdraw = Course.objects.filter(id=course1.id)
+        for c in course1_af_withdraw:
+            self.assertEqual(c.count_stu, 0)
+
+        self.assertEqual(response.status_code, 302)
 
 
     def test_profile_context(self):
-        c = Client()
         self.group = Group(name="student")
         self.group.save()
         self.c = Client()
@@ -504,7 +528,6 @@ class ViewTestCase(TestCase):
 
 
     def test_registration_context(self):
-        c = Client()
         self.group = Group(name="student")
         self.group.save()
         self.c = Client()
@@ -526,7 +549,6 @@ class ViewTestCase(TestCase):
 
 
     def test_admincourses_context(self):
-        c = Client()
         self.group = Group(name="admin")
         self.group.save()
         self.c = Client()
@@ -543,7 +565,6 @@ class ViewTestCase(TestCase):
 
 
     def test_course_context(self):
-        c = Client()
         self.group = Group(name="admin")
         self.group.save()
         self.c = Client()
@@ -569,11 +590,4 @@ class ViewTestCase(TestCase):
 
         self.assertEqual(response.context['course'], course1)
         self.assertEqual(list(response.context['students']) ,list_students_in_course)
-
-
-
-
-
-
-
 
