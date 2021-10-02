@@ -60,6 +60,8 @@ class ViewTestCase(TestCase):
     def test_courses_view_stu(self):
         self.c = Client()
         self.c.login(username='test', password='test')
+        course = Course.objects.create(c_code="CN000", c_name="TEST", semester=1, a_year=2564)
+        self.enroll = Enroll.objects.create(student=self.student, course=course)
         response = self.c.get(reverse('courses:courses'), follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'courses/courses.html', 'courses/layout.html')
@@ -227,15 +229,6 @@ class ViewTestCase(TestCase):
         self.assertEqual(enroll.count(), 0)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'courses/courses.html', 'courses/layout.html')
-
-
-    def test_enrollCourse_view_ad(self):
-        self.c = Client()
-        self.c.login(username='ad', password='testad')
-        course = Course.objects.create(c_code="CN000", c_name="TEST", semester=1, a_year=2564)
-        response = self.c.get(reverse('courses:enroll_course', args=(course.id,)), follow=True)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'courses/indexadmin.html', 'courses/layout.html')
 
 
     def test_login_view_ad_succ(self):
