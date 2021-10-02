@@ -29,8 +29,8 @@ class ViewTestCase(TestCase):
     def test_index_view_stu(self):
         self.c = Client()
         self.c.login(username='test', password='test')
-        response = self.c.get(reverse('courses:index'))
-        self.assertEqual(response.status_code, 200) #ไปถูกที่=200
+        response = self.c.get(reverse('courses:index'), follow=True)
+        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'courses/index.html', 'courses/layout.html')
 
     def test_index_view_ad(self):
@@ -52,8 +52,9 @@ class ViewTestCase(TestCase):
     def test_indexadmin_view_ad(self):
         self.c = Client()
         self.c.login(username='ad', password='testad')
-        response = self.c.get(reverse('courses:indexadmin'))
-        self.assertEqual(response.status_code, 200) #ไปถูกที่=200
+        response = self.c.get(reverse('courses:indexadmin'), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'courses/indexadmin.html', 'courses/layout.html')
 
 
     def test_courses_view_stu(self):
@@ -61,85 +62,118 @@ class ViewTestCase(TestCase):
         self.c.login(username='test', password='test')
         course = Course.objects.create(c_code="CN000", c_name="TEST", semester=1, a_year=2564)
         self.enroll = Enroll.objects.create(student=self.student, course=course)
-        response = self.c.get(reverse('courses:courses'))
-        self.assertEqual(response.status_code, 200) #ไปถูกที่=200
+        response = self.c.get(reverse('courses:courses'), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'courses/courses.html', 'courses/layout.html')
 
 
     def test_courses_view_ad(self):
         self.c = Client()
         self.c.login(username='ad', password='testad')
-        response = self.c.get(reverse('courses:courses'))
-        self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302
+        response = self.c.get(reverse('courses:courses'), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'courses/indexadmin.html', 'courses/layout.html')
 
 
     def test_registration_view_stu(self):
         self.c = Client()
         self.c.login(username='test', password='test')
-        response = self.c.get(reverse('courses:registration'))
-        self.assertEqual(response.status_code, 200) #ไปถูกที่=200
+        response = self.c.get(reverse('courses:registration'), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'courses/registration.html', 'courses/layout.html')
+
+
+    def test_registration_view_stu_can_delete_course(self):
+        self.c = Client()
+        self.c.login(username='test', password='test')
+        course1 = Course.objects.create(c_code="TU00", c_name="AA", semester="0", a_year="2500", count_stu="1", max_stu="2", status=True)
+        course2 = Course.objects.create(c_code="TU01", c_name="BB", semester="0", a_year="2500", count_stu="1", max_stu="2", status=True)
+        enroll = Enroll.objects.create(student=self.student, course=course1)
+        Enroll.objects.create(student=self.student, course=course2)
+
+        response = self.c.post(reverse('courses:delete_course', args=(enroll.id,)), follow=True)
+        enroll_all = Enroll.objects.all()
+        for e in enroll_all:
+            self.assertEqual(e.course, course2)
+
+        course1_af_withdraw = Course.objects.filter(id=course1.id)
+        for c in course1_af_withdraw:
+            self.assertEqual(c.count_stu, 0)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'courses/registration.html', 'courses/layout.html')
 
 
     def test_registration_view_ad(self):
         self.c = Client()
         self.c.login(username='ad', password='testad')
-        response = self.c.get(reverse('courses:registration'))
-        self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302
+        response = self.c.get(reverse('courses:registration'), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'courses/indexadmin.html', 'courses/layout.html')
 
 
     def test_profile_view_stu(self):
         self.c = Client()
         self.c.login(username='test', password='test')
-        response = self.c.get(reverse('courses:profile'))
-        self.assertEqual(response.status_code, 200) #ไปถูกที่=200
+        response = self.c.get(reverse('courses:profile'), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'courses/profile.html', 'courses/layout.html')
 
 
     def test_profile_view_ad(self):
         self.c = Client()
         self.c.login(username='ad', password='testad')
-        response = self.c.get(reverse('courses:profile'))
-        self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302
+        response = self.c.get(reverse('courses:profile'), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'courses/indexadmin.html', 'courses/layout.html')
 
 
     def test_admincourses_view_stu(self):
         self.c = Client()
         self.c.login(username='test', password='test')
-        response = self.c.get(reverse('courses:admincourses'))
-        self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302
+        response = self.c.get(reverse('courses:admincourses'), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'courses/index.html', 'courses/layout.html')
 
 
     def test_admincourses_view_ad(self):
         self.c = Client()
         self.c.login(username='ad', password='testad')
-        response = self.c.get(reverse('courses:admincourses'))
-        self.assertEqual(response.status_code, 200) #ไปถูกที่=200
+        response = self.c.get(reverse('courses:admincourses'), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'courses/admincourses.html', 'courses/layout.html')
 
 
     def test_unauthenticated_view_stu(self):
         self.c = Client()
         self.c.login(username='test', password='test')
-        response = self.c.get(reverse('courses:login'))
-        self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302
+        response = self.c.get(reverse('courses:login'), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'courses/index.html', 'courses/layout.html')
 
 
     def test_unauthenticated_view_ad(self):
         self.c = Client()
         self.c.login(username='ad', password='testad')
-        response = self.c.get(reverse('courses:login'))
-        self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302
+        response = self.c.get(reverse('courses:login'), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'courses/indexadmin.html', 'courses/layout.html')
 
 
     def test_unauthenticated_view_unauthenticated(self):
         self.c = Client()
-        response = self.c.get(reverse('courses:login'))
-        self.assertEqual(response.status_code, 200) #ไปถูกที่=200
+        response = self.c.get(reverse('courses:login'), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'courses/login.html')
 
 
     def test_course_view_stu(self):
         self.c = Client()
         self.c.login(username='test', password='test')
         course = Course.objects.create(c_code="CN000", c_name="TEST", semester=1, a_year=2564)
-        response = self.c.get(reverse('courses:acourse', args=(course.id,)))
-        self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302
+        response = self.c.get(reverse('courses:acourse', args=(course.id,)), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'courses/index.html', 'courses/layout.html')
 
 
     def test_course_view_ad(self):
@@ -147,32 +181,36 @@ class ViewTestCase(TestCase):
         self.c.login(username='ad', password='testad')
         course = Course.objects.create(c_code="CN000", c_name="TEST", semester=1, a_year=2564)
         Enroll.objects.create(student=self.student, course=course)
-        response = self.c.get(reverse('courses:acourse', args=(course.id,)))
-        self.assertEqual(response.status_code, 200) #ไปถูกที่=200
+        response = self.c.get(reverse('courses:acourse', args=(course.id,)), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'courses/course.html', 'courses/layout.html')
 
 
     def test_logout_view_stu(self):
         self.c = Client()
         self.c.login(username='test', password='test')
-        response = self.c.get(reverse('courses:logout'))
-        self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302
+        response = self.c.get(reverse('courses:logout'), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'courses/login.html')
 
 
     def test_logout_view_ad(self):
         self.c = Client()
         self.c.login(username='ad', password='testad')
-        response = self.c.get(reverse('courses:logout'))
-        self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302
+        response = self.c.get(reverse('courses:logout'), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'courses/login.html')
 
 
     def test_enrollCourse_view_stu_enroll(self):
         self.c = Client()
         self.c.login(username='test', password='test')
         course = Course.objects.create(c_code="CN000", c_name="TEST", semester=1, a_year=2564)
-        self.assertEqual(Enroll.objects.all().count(), 0) #studentก่อนกดปุ่มenroll
-        response = self.c.post(reverse('courses:enroll_course', args=(course.id,)))
-        self.assertEqual(Enroll.objects.all().count(), 1) #studentกดปุ่มenroll มีobject enrollเกิดมาอันนึง
-        self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302 โดนredirect('courses:registration')
+        self.assertEqual(Enroll.objects.all().count(), 0)
+        response = self.c.post(reverse('courses:enroll_course', args=(course.id,)), follow=True)
+        self.assertEqual(Enroll.objects.all().count(), 1)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'courses/registration.html', 'courses/layout.html')
         course = Course.objects.get(id=course.id)
         self.assertEqual(course.count_stu, 1)
 
@@ -182,40 +220,45 @@ class ViewTestCase(TestCase):
         self.c.login(username='test', password='test')
         course1 = Course.objects.create(c_code="TU00", c_name="AA", semester="0", a_year="2500", count_stu="0", max_stu="2", status=True)
 
-        response = self.c.get(reverse('courses:enroll_course', args=(course1.id,)))
+        response = self.c.get(reverse('courses:enroll_course', args=(course1.id,)), follow=True)
         enroll = Enroll.objects.all()
         course = Course.objects.filter(id=course1.id)
         for c in course:
             self.assertEqual(c.count_stu, 0)
 
-        self.assertEqual(enroll.count(), 0)    #ไม่มีวิชาในenroll
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(enroll.count(), 0)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'courses/courses.html', 'courses/layout.html')
 
 
     def test_enrollCourse_view_ad(self):
         self.c = Client()
         self.c.login(username='ad', password='testad')
         course = Course.objects.create(c_code="CN000", c_name="TEST", semester=1, a_year=2564)
-        response = self.c.get(reverse('courses:enroll_course', args=(course.id,)))
-        self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302 โดน redirect('courses:indexadmin')
+        response = self.c.get(reverse('courses:enroll_course', args=(course.id,)), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'courses/indexadmin.html', 'courses/layout.html')
 
 
     def test_login_view_ad_succ(self):
         self.c = Client()
-        response = self.c.post(reverse('courses:login'), {'username': 'ad', 'password': 'testad'})
-        self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302
+        response = self.c.post(reverse('courses:login'), {'username': 'ad', 'password': 'testad'}, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'courses/indexadmin.html', 'courses/layout.html')
 
 
     def test_login_view_stu_succ(self):
         self.c = Client()
-        response = self.c.post(reverse('courses:login'), {'username': "test", 'password': "test"})
-        self.assertEqual(response.status_code, 302) #โดนย้ายปลายทางที่มีpageรองรับ302
+        response = self.c.post(reverse('courses:login'), {'username': "test", 'password': "test"}, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'courses/index.html', 'courses/layout.html')
 
 
     def test_login_view_fail(self):
         self.c = Client()
-        response = self.c.post(reverse('courses:login'), {'username': "test", 'password': "test1"})
-        self.assertEqual(response.status_code, 200) #login ไม่สำเร็จ(รหัสผิด) จึงอยู่หน้าเดิมให้ใส่รหัสใหม่
+        response = self.c.post(reverse('courses:login'), {'username': "test", 'password': "test1"}, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'courses/login.html')
 
 
     def test_index_context_view_stu1(self):
@@ -223,7 +266,7 @@ class ViewTestCase(TestCase):
         user_2 = User.objects.create_user(username="test2", email="test2@test.com", password="test2")
         Student.objects.create(user=user_2, First_name="user2Firstname", Last_name="user2Lastname", email="user2@example.com", student_id="6210000001")
         self.c.login(username='test', password='test')
-        response = self.c.get(reverse('courses:index'))
+        response = self.c.get(reverse('courses:index'), follow=True)
         self.assertEqual(response.context['student'], self.student)
 
 
@@ -245,26 +288,6 @@ class ViewTestCase(TestCase):
         Course.objects.create(c_code="TU01" ,c_name="BB" ,semester=0 ,a_year=2500 ,status=True)
         response = self.c.get(reverse('courses:courses'))
         self.assertEqual(list(response.context['courses']), list(Course.objects.all()))
-
-
-    def test_can_delete_course(self):
-        self.c = Client()
-        self.c.login(username='test', password='test')
-        course1 = Course.objects.create(c_code="TU00", c_name="AA", semester="0", a_year="2500", count_stu="1", max_stu="2", status=True)
-        course2 = Course.objects.create(c_code="TU01", c_name="BB", semester="0", a_year="2500", count_stu="1", max_stu="2", status=True)
-        enroll = Enroll.objects.create(student=self.student, course=course1)
-        Enroll.objects.create(student=self.student, course=course2)
-
-        response = self.c.post(reverse('courses:delete_course', args=(enroll.id,)))
-        enroll_all = Enroll.objects.all()
-        for e in enroll_all:
-            self.assertEqual(e.course, course2)
-
-        course1_af_withdraw = Course.objects.filter(id=course1.id)
-        for c in course1_af_withdraw:
-            self.assertEqual(c.count_stu, 0)
-
-        self.assertEqual(response.status_code, 302)
 
 
     def test_registration_context(self):
