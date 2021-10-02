@@ -60,8 +60,6 @@ class ViewTestCase(TestCase):
     def test_courses_view_stu(self):
         self.c = Client()
         self.c.login(username='test', password='test')
-        course = Course.objects.create(c_code="CN000", c_name="TEST", semester=1, a_year=2564)
-        self.enroll = Enroll.objects.create(student=self.student, course=course)
         response = self.c.get(reverse('courses:courses'), follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'courses/courses.html', 'courses/layout.html')
